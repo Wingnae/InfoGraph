@@ -40,7 +40,7 @@ void HierarchicalRenderable::setLocalTransform(const glm::mat4& localTransform)
 glm::mat4 HierarchicalRenderable::computeTotalParentTransform() const
 {
     if( m_parent )
-        return m_parentTransform  * m_parent->computeTotalParentTransform();
+        return m_parent->computeTotalParentTransform() * m_parentTransform;
     return m_parentTransform;
 }
 

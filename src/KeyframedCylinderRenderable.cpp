@@ -33,7 +33,7 @@ KeyframedCylinderRenderable::KeyframedCylinderRenderable( ShaderProgramPtr prog 
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_colors.size()*sizeof(glm::vec4), m_colors.data(), GL_STATIC_DRAW));
     glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_nBuffer));
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_normals.size()*sizeof(glm::vec3), m_normals.data(), GL_STATIC_DRAW));
- }
+}
 
 void KeyframedCylinderRenderable::addLocalTransformKeyframe( const GeometricTransformation& transformation, float time )
 {

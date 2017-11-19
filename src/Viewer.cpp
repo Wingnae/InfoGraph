@@ -413,6 +413,10 @@ void Viewer::handleEvent()
     m_lastEventHandleTime = clock::now();
 }
 
+Viewer::KeyboardState Viewer::getKeyboardState() {
+	return keyboard;
+}
+
 void Viewer::takeScreenshot()
 {
    /* int padding = 5;
