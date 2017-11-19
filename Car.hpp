@@ -4,21 +4,22 @@
 #include <Viewer.hpp>
 #include <KeyframedMeshRenderable.hpp>
 
-#define FORWARD		1
-#define BACKWARD	2
-#define LEFT		3
-#define RIGHT		4
-
-class Car {
+class Car : public HierarchicalRenderable, public std::enable_shared_from_this<Car> {
 private:
 	glm::vec3 pos;
 	glm::vec3 vel;
 	KeyframedMeshRenderablePtr body;
 	KeyframedMeshRenderablePtr wheels[4];
-	Viewer* viewer;
+	float lastTime;
 
 public:
-	Car(ShaderProgramPtr shader, Viewer& viewer);
-	void handle_event();
-	void move(int direction);
+	Car(ShaderProgramPtr shader);
+	void init();
+	void do_keyPressedEvent(sf::Event& e);
+	void do_keyReleasedEvent(sf::Event& e);
+
+	void do_draw();
+	void do_animate(float time);
 };
+
+typedef std::shared_ptr<Car> CarPtr;

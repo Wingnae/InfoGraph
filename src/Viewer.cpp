@@ -404,14 +404,11 @@ void Viewer::changeCameraMode()
     if( m_camera.getMouseBehavior() == Camera::ARCBALL_BEHAVIOR )
     {
         m_camera.setMouseBehavior( Camera::SPACESHIP_BEHAVIOR );
-        //m_modeInformationText = "Spaceship Camera Activated";
     }
     else
     {
         m_camera.setMouseBehavior( Camera::ARCBALL_BEHAVIOR );
-        //m_modeInformationText = "Arcball Camera Activated";
     }
-    //m_modeInformationTextDisappearanceTime = clock::now() + g_modeInformationTextTimeout;
 }
 
 bool Viewer::isRunning() const
