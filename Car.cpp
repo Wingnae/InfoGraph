@@ -1,6 +1,7 @@
 #include "Car.hpp"
 
 Car::Car(ShaderProgramPtr shader, Viewer& viewer) {
+	this->viewer = &viewer;
 	body = std::make_shared<KeyframedMeshRenderable>(shader, "meshes/car.obj");
 	body->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
 	body->setLocalTransform(glm::mat4(1.0));
@@ -17,29 +18,21 @@ Car::Car(ShaderProgramPtr shader, Viewer& viewer) {
 	wheels[2]->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(-1.15, 0.8, 0)));
 	wheels[3]->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(-1.15, -0.8, 0)));
 
-	vel_x = 0.1f;
-	vel_y = 0;
-	vel_z = 0;
+	pos = glm::vec3(0.0f, 0.0f, 0.0f);
+	vel = glm::vec3(1.0f, 0.0f, 0.0f);
 }
 
 void Car::handle_event() {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-		move(LEFT);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		move(RIGHT);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-		move(FORWARD);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		move(BACKWARD);
+	
 }
 
 void Car::move(int direction) {
 	switch (direction) {
 	case FORWARD:
-		body->setParentTransform(glm::translate(body->getParentTransform(), glm::vec3(vel_x, vel_y, vel_z)));
+		body->setParentTransform(glm::translate(body->getParentTransform(), glm::vec3(vel.x, vel.y, vel.z)));
 		break;
 	case BACKWARD:
-		body->setParentTransform(glm::translate(body->getParentTransform(), glm::vec3(-vel_x, -vel_y, vel_z)));
+		body->setParentTransform(glm::translate(body->getParentTransform(), glm::vec3(-vel.x, -vel.y, vel.z)));
 		break;
 	case LEFT:
 		body->setParentTransform(glm::rotate(body->getParentTransform(), glm::radians(1.0f), glm::vec3(0.0f, 0.0f, 1.0f)));

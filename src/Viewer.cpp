@@ -43,9 +43,7 @@ Viewer::Viewer(float width, float height) :
         "Computer Graphics Practicals",
         sf::Style::Default,
         sf::ContextSettings{ 24 /* depth*/, 8 /*stencil*/, 4 /*anti aliasing level*/, 4 /*GL major version*/, 0 /*GL minor version*/}
-        },
-    //m_modeInformationTextDisappearanceTime{ clock::now() + g_modeInformationTextTimeout },
-    //m_modeInformationText{ "Arcball Camera Activated" },
+	},
     m_applicationRunning{ true }, m_animationLoop{ false }, m_animationIsStarted{ false },
     m_loopDuration{0}, m_simulationTime{0},
     m_screenshotCounter{0}, m_helpDisplayed{false},
@@ -65,11 +63,6 @@ Viewer::Viewer(float width, float height) :
 
     //Set up GLEW
     initializeGL();
-
-    //Initialize the text engine (this SHOULD be done after initializeGL, as the text
-    //engine store some data on the graphic card)
-    //m_tengine.init();
-    //m_tengine.setWindowDimensions( m_window.getSize().x, m_window.getSize().y );
 }
 
 static const std::string g_help_message =
@@ -117,22 +110,6 @@ void Viewer::draw()
         r->draw();
         r->unbindShaderProgram();
     }
-
-    //Refresh the viewer.m_window
-    /*
-    if( clock::now() < m_modeInformationTextDisappearanceTime )
-    {
-        //m_tengine.render( m_modeInformationText, glm::vec2(10, m_window.getSize().y - 30), glm::vec3(0.1, 0.1, 0.1) );
-    }
-    {
-        std::ostringstream ss;
-        ss << "FPS: " << std::setprecision( 2 ) << std::fixed << m_fpsCounter.getFPS();
-        //m_tengine.render( ss.str(), glm::vec2(m_window.getSize().x - 200, m_window.getSize().y - 30), glm::vec3(0.1,0.1,0.1) );
-    }
-    if( m_helpDisplayed )
-        m_tengine.render( g_help_message, glm::vec2(100, 650), glm::vec3{.0, .1, .2});
-    */
-
 }
 
 float Viewer::getTime()
@@ -396,7 +373,7 @@ void Viewer::handleEvent()
         }
     }
 
-    if( m_camera.getMouseBehavior() == Camera::SPACESHIP_BEHAVIOR
+   /* if( m_camera.getMouseBehavior() == Camera::SPACESHIP_BEHAVIOR
             && (keyboard.forward || keyboard.backward || keyboard.left || keyboard.right ) )
     {
         float speed = keyboard.speed * Duration(clock::now() - m_lastEventHandleTime).count();
@@ -409,7 +386,7 @@ void Viewer::handleEvent()
                               + shift.x * m_camera.getRight()
                               + shift.y * m_camera.getUp()
                               + shift.z * m_camera.getForward() );
-    }
+    }*/
     m_lastEventHandleTime = clock::now();
 }
 
@@ -419,19 +396,6 @@ Viewer::KeyboardState Viewer::getKeyboardState() {
 
 void Viewer::takeScreenshot()
 {
-   /* int padding = 5;
-    sf::Image screen = m_window.capture();
-    std::ostringstream filename_sstr;
-    filename_sstr << screenshot_basename << std::setw(padding) << std::setfill('0') << m_screenshotCounter << ".png";
-    if( !screen.saveToFile(filename_sstr.str()) )
-    {
-        LOG( error, "Error while saving the screenshot")
-    }
-    else
-    {
-        LOG( info, "Screenshot successfully taken : " << filename_sstr.str())
-    }
-    m_screenshotCounter++;*/
 	std::cout << "Screenshots disabled" << std::endl;
 }
 
@@ -487,9 +451,3 @@ glm::vec3 Viewer::worldToWindow( const glm::vec3& worldCoordinate )
     sf::Vector2u size = m_window.getSize();
     return glm::project( worldCoordinate, m_camera.viewMatrix(), m_camera.projectionMatrix(), glm::vec4(0,0,size.x, size.y));
 }
-
-//void Viewer::displayText(std::string text, Viewer::Duration duration)
-//{
-    //m_modeInformationText = text;
-    //m_modeInformationTextDisappearanceTime = clock::now() + duration;
-//}

@@ -11,9 +11,11 @@
 
 class Car {
 private:
-	float vel_x, vel_y, vel_z;
+	glm::vec3 pos;
+	glm::vec3 vel;
 	KeyframedMeshRenderablePtr body;
 	KeyframedMeshRenderablePtr wheels[4];
+	Viewer* viewer;
 
 public:
 	Car(ShaderProgramPtr shader, Viewer& viewer);

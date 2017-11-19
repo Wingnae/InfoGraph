@@ -7,7 +7,7 @@ Renderable::~Renderable(){}
 
 Renderable::Renderable(ShaderProgramPtr program)
   : m_shaderProgram(program),
-    m_model(glm::mat4(1.0)), // default: loads the identity
+    m_model(glm::mat4(1.0)),
     m_viewer(nullptr)
 {}
 
@@ -142,8 +142,3 @@ void Renderable::rotate(float angle, float x, float y, float z) {
 void Renderable::scale(float x, float y, float z) {
 	setModelMatrix(glm::scale(getModelMatrix(), glm::vec3(x, y , z)));
 }
-
-//void Renderable::displayTextInViewer(std::string text) const
-//{
-//    getViewer()->displayText(text);
-//}
