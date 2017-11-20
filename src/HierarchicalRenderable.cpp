@@ -24,7 +24,7 @@ void HierarchicalRenderable::setParentTransform( const glm::mat4& parentTransfor
 
 void HierarchicalRenderable::updateModelMatrix()
 {
-    m_model = m_localTransform * computeTotalParentTransform();
+    m_model = computeTotalParentTransform() * m_localTransform;
 }
 
 const glm::mat4& HierarchicalRenderable::getLocalTransform() const
