@@ -15,11 +15,7 @@ KeyframedMeshRenderable::KeyframedMeshRenderable(ShaderProgramPtr shaderProgram,
 	read_obj(filename, m_positions, m_indices, m_normals, texCoords);
 	m_colors.resize(m_positions.size());
 	for (size_t i = 0; i < m_colors.size(); ++i) {
-		/*float shade = (1.0f + glm::dot(m_normals[i], glm::normalize(glm::vec3(1.0f, -1.0f, 0.2f))))/2.5f;
-		m_colors[i] = glm::vec4(shade * m_positions[i], 1.0f);
-		if (m_positions.size() < 100)
-			m_colors[i] = glm::vec4(0.4, 0.4, 0.4, 1);*/
-		m_colors[i] = glm::vec4((float)rand() / (float)RAND_MAX, (float)rand() / (float)RAND_MAX, (float)rand() / (float)RAND_MAX, 1.0f);
+		m_colors[i] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	//Create buffers
