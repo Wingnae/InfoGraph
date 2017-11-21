@@ -11,7 +11,8 @@
 //#define ACCR		360.0f
 
 #define GRAVITY		9.81f
-#define AERODRAG	1.0f
+#define AERODRAG	10.0f
+#define CRR			0.01f
 
 #define NONE		0
 #define FORWARD		1
@@ -45,7 +46,6 @@ private:
 	const float m_torque;
 	const float m_torqueb;
 	const float m_brakes;
-	const float m_resistance;
 	const float m_wradius;
 
 	glm::vec3 m_velocity;

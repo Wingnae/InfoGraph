@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Car.hpp"
 
-Car::Car(ShaderProgramPtr shader) : HierarchicalRenderable(shader), m_mass(1000.0f), m_torque(3000.0f), m_torqueb(1000.0f), m_brakes(10000.0f), m_resistance(1.0f), m_wradius(0.5f) {
+Car::Car(ShaderProgramPtr shader) : HierarchicalRenderable(shader), m_mass(1500.0f), m_torque(3000.0f), m_torqueb(1000.0f), m_brakes(10000.0f), m_wradius(0.3f) {
 	//Car
 	setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
 	setLocalTransform(glm::mat4(1.0f));
@@ -88,11 +88,13 @@ void Car::do_draw() {
 void Car::do_animate(float time) {
 	computeTotalForce();
 
-	float dt = m_lastTime - time;
+	float dt = time - m_lastTime;
 	m_lastTime = time;
 
 	m_acceleration = m_ftotal / m_mass;
 	m_velocity += m_acceleration * dt;
+
+	std::cout << "speed :" << ceil(m_velocity.x * 3.6f) << "kmh /  fps:" << ceil(1.0f / dt) << std::endl;
 
 	setParentTransform(glm::translate(getParentTransform(), dt * m_velocity));
 	m_viewer->getCamera().setViewMatrix(glm::lookAt(glm::vec3(getParentTransform()[3]) + glm::vec3(-15.0f, 0.0f, 7.5f), glm::vec3(getParentTransform()[3]), glm::vec3(0, 0, 1)));
@@ -104,11 +106,11 @@ void Car::computeTotalForce() {
 	//computeGravity();
 	m_ftotal = m_fdrag + m_frr + m_fg;
 
-	if (m_state.direction == FORWARD || m_state.direction == BACKWARD && m_velocity.x <= 0) {
+	if (m_state.direction == FORWARD && m_velocity.x >= 0 || m_state.direction == BACKWARD && m_velocity.x <= 0) {
 		computeTractionForce();
 		m_ftotal += m_ftraction;
 	}
-	else if (m_state.direction == BACKWARD) {
+	else {
 		computeBrakeForce();
 		m_ftotal += m_fbrake;
 	}
@@ -117,12 +119,12 @@ void Car::computeTotalForce() {
 void Car::computeTractionForce() {
 	if(m_state.direction == FORWARD)
 		m_ftraction.x = m_torque / m_wradius;
-	else if (m_state.direction == BACKWARD)
+	if (m_state.direction == BACKWARD)
 		m_ftraction.x = -m_torqueb / m_wradius;
 }
 
 void Car::computeBrakeForce() {
-	m_fbrake.x = -m_brakes;
+	m_fbrake.x = m_state.direction * m_brakes;
 }
 
 void Car::computeDragForce() {
@@ -130,7 +132,7 @@ void Car::computeDragForce() {
 }
 
 void Car::computeResistanceForce() {
-	m_frr = -m_resistance * m_velocity;
+	m_frr = -CRR * m_velocity;
 }
 
 void Car::computeGravity() {
