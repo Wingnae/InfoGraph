@@ -4,15 +4,21 @@
 #include <Viewer.hpp>
 #include <KeyframedMeshRenderable.hpp>
 
-////Old
-//#define MAXSPEED	80.0f
-//#define MAXSPEEDR	180.0f
-//#define ACC			40.0f
-//#define ACCR		360.0f
+#define GEAR1		40.0f
+#define GEARR		20.0f
+#define STEERING	90.0f
+#define MAXSTEER	45.0f
 
+#define PI			3.141592653589793238463f
 #define GRAVITY		9.81f
-#define	CDRAG		10.0f
-#define CRR			0.01f
+#define	CDRAG		5.0f
+#define CRR			500.0f
+#define CORNER		0.01f
+#define BURN		5.0f
+#define INERTIA		((FRONTCG * REARCG) * 3)
+
+#define FRONTCG		0.98f
+#define REARCG		1.15f
 
 #define NONE		0
 #define FORWARD		1
@@ -30,9 +36,10 @@ public:
 	void do_animate(float time);
 	
 	void computeTotalForce();
+	void computeLateralForce();
 	void computeTractionForce();
-	void computeDragForce();
 	void computeResistanceForce();
+	void computeDragForce();
 	void computeGravity();
 
 private:
@@ -61,20 +68,17 @@ private:
 	float m_torquecar;
 
 	//Movement
-	glm::vec3 m_position;
 	glm::vec3 m_velocity;
 	glm::vec3 m_acceleration;
-	glm::vec3 m_angacceleration;
 	glm::vec3 m_angvelocity;
-	glm::vec3 m_angposition;
+	glm::vec3 m_angacceleration;
 
 	//Forces
-	glm::vec3 m_FlatF;
-	glm::vec3 m_FlatR;
+	float m_FlatF;
+	float m_FlatR;
+	glm::vec3 m_Ftraction;
 	glm::vec3 m_Frr;
 	glm::vec3 m_Fdrag;
-	glm::vec3 m_Ftraction;
-	glm::vec3 m_Fresistance;
 	glm::vec3 m_Fg;
 	glm::vec3 m_Ftotal;
 
@@ -118,40 +122,39 @@ typedef std::shared_ptr<Car> CarPtr;
 
 //------------------------ALGORITHM------------------------
 //
-//1. V.x = Vlong, V.y = Vlat
-//2. Compute alpha : alphaF = atan((V.y + w*F)/V.x) - sigma * sign(V.x)		for front
-//					 alphaR = atan((V.y - w*R)/V.x)							for rear
-//3. FlatR = cornering * alphaR
-	//FlatF = cornering * alphaF
-//4. Cap Flat to max
-//5. Flat *= load
-//6.7.8.9.10 Compute engine torque Te
-	//6. TOR = Vx 60 * gk*G / (2PI * rw)
-	//7. Clamp the engine turn over rate from 6 to the defined redline
-	//8. If use automatic transmission call automaticTransmission() function
-	//to shift the gear
-	//9. Compute the constant that define the torque curve line from the
-	//engine turn over rate
-	//10. From 9, compute the maximum engine torque, Te
-//11. Tw = Te * gear
-//12. Ftraction = Tw / Wradius
-	//13. If the player is braking Ftraction = -brakes
-//15. Frr = -Crr * V
-//16. Fdrag = -Cdrag * V * |V|
-//17. Fresistance = Frr + Fdrag
-//18. Ftotal.x = Ftraction + Flatf * sin(sigma) * Fresistance.x
-	//Ftotal.y = Flatr + Flatf * cos(sigma) * Fresistance.y
-	//Ftotal.z = Fg
-//19. Tcar = cos(sigma) * Flatf * b – Flatr * c
-//20. Acc = Ftotal / m																					DONE
-//21. angAcc = Tcar / I																					
-//22. V += dt * Acc																						DONE
-//23. P += dt * V																						DONE
-//24. Move the camera																					DONE
-//25. angV += dt * angAcc																				DONE
-//26. angP += dt * angV																					DONE
-//27. Wrot = V / Wradius
-//28. Render the car																					DONE
+//1. V.x = Vlong, V.y = Vlat																			DONE
+//2. Compute alpha : alphaF = atan((V.y + w*F)/V.x) - sigma * sign(V.x)		for front					DONE
+//					 alphaR = atan((V.y - w*R)/V.x)							for rear					DONE
+//3. FlatR = cornering * alphaR																			DONE
+	//FlatF = cornering * alphaF																		DONE
+//4. Cap Flat to max																					DONE
+//5. Flat *= load																						DONE
+//6.7.8.9.10 Compute engine torque Te																	DONE
+	//6. TOR = Vx 60 * gk*G / (2PI * rw)																SKIPPED
+	//7. Clamp the engine turn over rate from 6 to the defined redline									SKIPPED
+	//8. If use automatic transmission call automaticTransmission() function							SKIPPED
+	//to shift the gear																					SKIPPED
+	//9. Compute the constant that define the torque curve line from the								SKIPPED
+	//engine turn over rate																				SKIPPED
+	//10. From 9, compute the maximum engine torque, Te													SKIPPED
+//11. Tw = Te * gear																					DONE
+//12. Ftraction = Tw / Wradius																			DONE
+	//13. If the player is braking Ftraction = -brakes													DONE
+//15. Frr = -Crr * V																					DONE
+//16. Fdrag = -Cdrag * V * |V|																			DONE
+//17. Ftotal.x = Ftraction + Flatf * sin(sigma) * Fresistance.x											DONE
+	//Ftotal.y = Flatr + Flatf * cos(sigma) * Fresistance.y												DONE
+	//Ftotal.z = Fg																						DONE
+//18. Tcar = cos(sigma) * Flatf * b – Flatr * c															DONE
+//19. Acc = Ftotal / m																					DONE
+//20. angAcc = Tcar / I																					DONE
+//21. V += dt * Acc																						DONE
+//22. P += dt * V																						DONE
+//23. Move the camera																					DONE
+//24. angV += dt * angAcc																				DONE
+//25. angP += dt * angV																					DONE
+//26. Wrot = V / Wradius
+//27. Render the car																					DONE
 
 //-----------------------GLOSSARY-----------------------
 //
@@ -184,6 +187,5 @@ typedef std::shared_ptr<Car> CarPtr;
 //Frr			=	m_Frr
 //Fdrag			=	m_Fdrag
 //Ftraction		=	m_Ftraction
-//Fresistance	=	m_Fresistance
 //Fg			=	m_Fg
 //Ftotal		=	m_Ftotal

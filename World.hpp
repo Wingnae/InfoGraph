@@ -7,6 +7,7 @@
 class World : public HierarchicalRenderable, public std::enable_shared_from_this<World> {
 private:
 	KeyframedMeshRenderablePtr ground;
+	KeyframedMeshRenderablePtr boxes[20];
 
 public:
 	World(ShaderProgramPtr shader);
