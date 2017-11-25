@@ -40,7 +40,7 @@ Viewer::~Viewer()
 Viewer::Viewer(float width, float height) :
     m_window{
         sf::VideoMode(width, height),
-        "Computer Graphics Practicals",
+        "Car",
         sf::Style::Default,
         sf::ContextSettings{ 24 /* depth*/, 8 /*stencil*/, 4 /*anti aliasing level*/, 4 /*GL major version*/, 0 /*GL minor version*/}
 	},
@@ -49,6 +49,7 @@ Viewer::Viewer(float width, float height) :
     m_screenshotCounter{0}, m_helpDisplayed{false},
     m_lastEventHandleTime{ clock::now() }
 {
+	m_window.setVerticalSyncEnabled(true);
     sf::ContextSettings settings = m_window.getSettings();
     LOG( info, "Settings of OPENGL Context created by SFML");
     LOG( info, "\tdepth bits:         " << settings.depthBits );

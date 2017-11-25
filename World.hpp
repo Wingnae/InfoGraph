@@ -2,12 +2,12 @@
 
 #include <ShaderProgram.hpp>
 #include <Viewer.hpp>
-#include <KeyframedMeshRenderable.hpp>
+#include <HierarchicalMeshRenderable.hpp>
 
 class World : public HierarchicalRenderable, public std::enable_shared_from_this<World> {
 private:
-	KeyframedMeshRenderablePtr ground;
-	KeyframedMeshRenderablePtr boxes[20];
+	HierarchicalMeshRenderablePtr ground;
+	HierarchicalMeshRenderablePtr boxes[20];
 
 public:
 	World(ShaderProgramPtr shader);

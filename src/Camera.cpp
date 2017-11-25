@@ -1,9 +1,13 @@
 #include "./../include/Camera.hpp"
 #include <iostream>
 
+#define GLM_ENABLE_EXPERIMENTAL
+
 #include <glm/gtc/type_precision.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/matrix_interpolation.hpp>
+#include <glm/gtx/compatibility.hpp>
 
 using namespace std;
 

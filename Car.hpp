@@ -2,7 +2,7 @@
 
 #include <ShaderProgram.hpp>
 #include <Viewer.hpp>
-#include <KeyframedMeshRenderable.hpp>
+#include <HierarchicalMeshRenderable.hpp>
 
 #define GEAR1		40.0f
 #define GEARR		20.0f
@@ -13,9 +13,9 @@
 #define GRAVITY		9.81f
 #define	CDRAG		5.0f
 #define CRR			500.0f
-#define CORNER		0.01f
-#define BURN		5.0f
-#define INERTIA		((FRONTCG * REARCG) * 3)
+#define CORNER		3.0f
+#define BURN		1000.0f
+#define INERTIA		((FRONTCG * REARCG) * 9810.0f)
 
 #define FRONTCG		0.98f
 #define REARCG		1.15f
@@ -30,6 +30,7 @@ class Car : public HierarchicalRenderable, public std::enable_shared_from_this<C
 public:
 	Car(ShaderProgramPtr shader, float mass, float engine, float brakes);
 	void init();
+	void reset();
 	void do_keyPressedEvent(sf::Event& e);
 	void do_keyReleasedEvent(sf::Event& e);
 	void do_draw();
@@ -58,14 +59,12 @@ private:
 	float m_alphaR;
 	float m_sigma;
 	
-	//Traction
+	//Rotation
 	float m_gear;
 	float m_torque;
-
-	//Wheels
+	float m_torquecar;
 	float m_wradius;
 	float m_wrotation;
-	float m_torquecar;
 
 	//Movement
 	glm::vec3 m_velocity;
@@ -82,8 +81,8 @@ private:
 	glm::vec3 m_Fg;
 	glm::vec3 m_Ftotal;
 
-	KeyframedMeshRenderablePtr m_frame;
-	KeyframedMeshRenderablePtr m_wheels[4];
+	HierarchicalMeshRenderablePtr m_frame;
+	HierarchicalMeshRenderablePtr m_wheels[4];
 	float m_lastTime;
 	State m_state;
 };

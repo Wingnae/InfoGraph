@@ -8,13 +8,13 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine, float brakes) : Hier
 	setLocalTransform(glm::mat4(1.0f));
 
 	//Frame
-	m_frame = std::make_shared<KeyframedMeshRenderable>(shader, "meshes/car.obj");
+	m_frame = std::make_shared<HierarchicalMeshRenderable>(shader, "meshes/car.obj");
 	m_frame->setParentTransform(glm::mat4(1.0));
 	m_frame->setLocalTransform(glm::mat4(1.0));
 
 	//Wheels
 	for (int i = 0; i < 4; i++) {
-		m_wheels[i] = std::make_shared<KeyframedMeshRenderable>(shader, "meshes/wheel.obj");
+		m_wheels[i] = std::make_shared<HierarchicalMeshRenderable>(shader, "meshes/wheel.obj");
 		m_wheels[i]->setLocalTransform(glm::mat4(1.0));
 		HierarchicalRenderable::addChild(m_frame, m_wheels[i]);
 	}
@@ -29,27 +29,16 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine, float brakes) : Hier
 
 	m_lastTime = 0.0f;
 
-	//Angles
 	m_alphaF = 0.0f;
 	m_alphaR = 0.0f;
-	m_sigma = glm::radians(0.0f);
+	m_sigma = 0.0f;
 
-	//Torque
-	m_gear = 10.0f;
+	m_gear = 0.0f;
 	m_torque = 0.0f;
-
-	//Wheels
+	m_torquecar = 0.0f;
 	m_wradius = 0.5f;
 	m_wrotation = 0.0f;
-	m_torquecar = 0.0f;
 
-	//Movement
-	m_velocity = glm::vec3(0, 0, 0);
-	m_acceleration = glm::vec3(0, 0, 0);
-	m_angvelocity = glm::vec3(0, 0, 0);
-	m_angacceleration = glm::vec3(0, 0, 0);
-
-	//Forces
 	m_FlatF = 0.0f;
 	m_FlatR = 0.0f;
 	m_Ftraction = glm::vec3(0, 0, 0);
@@ -57,10 +46,19 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine, float brakes) : Hier
 	m_Fdrag = glm::vec3(0, 0, 0);
 	m_Fg = glm::vec3(0, 0, 0);
 	m_Ftotal = glm::vec3(0, 0, 0);
+
+	reset();
 }
 
 void Car::init() {
 	HierarchicalRenderable::addChild(shared_from_this(), m_frame);
+}
+
+void Car::reset() {
+	m_velocity = glm::vec3(0, 0, 0);
+	m_acceleration = glm::vec3(0, 0, 0);
+	m_angvelocity = glm::vec3(0, 0, 0);
+	m_angacceleration = glm::vec3(0, 0, 0);
 }
 
 void Car::do_keyPressedEvent(sf::Event& e) {
@@ -124,13 +122,18 @@ void Car::do_animate(float time) {
 	float dt = time - m_lastTime;
 	m_lastTime = time;
 
+	float old_vel_x = m_velocity.x;
+	float old_vel_y = m_velocity.y;
+	float old_avel_z = m_angvelocity.z;
+	
+	//Wheel orientation
 	if (m_state.turn == NONE) {
 		if (abs(m_sigma) > abs(m_angvelocity.z * dt) && m_velocity.x > 0)
-			m_sigma += m_angvelocity.z * dt;
+			m_sigma += m_angvelocity.z * dt / 2;
 		else if (abs(m_sigma) > abs(m_angvelocity.z * dt) && m_velocity.x < 0)
-			m_sigma -= m_angvelocity.z * dt;
+			m_sigma -= m_angvelocity.z * dt / 2;
 	}
-	else if (abs(m_velocity.x) > 0.1f) {
+	else {
 		m_sigma += m_state.turn * glm::radians(STEERING) * dt;
 		if (m_sigma >  glm::radians(MAXSTEER))
 			m_sigma = glm::radians(MAXSTEER);
@@ -138,29 +141,27 @@ void Car::do_animate(float time) {
 			m_sigma = -glm::radians(MAXSTEER);
 	}
 
-	if (abs(m_velocity.x) <= 0.1f) {
-		m_velocity.y = 0;
-		m_angvelocity.z = 0;
-		m_sigma = 0;
-	}
-
 	computeTotalForce();
-	m_acceleration = m_Ftotal / m_mass;
-	m_velocity += m_acceleration * dt;
-	if(m_velocity.x * m_velocity.y > 0)
-		m_velocity.x -= BURN * m_velocity.y;
-	else
-		m_velocity.x += BURN * m_velocity.y;
-	setParentTransform(glm::translate(getParentTransform(), m_velocity * dt));
 
+	//Rotation
 	m_torquecar = cos(m_sigma) * m_FlatF * FRONTCG - m_FlatR * REARCG;
 	m_angacceleration.z = m_torquecar / INERTIA;
 	m_angvelocity.z += m_angacceleration.z * dt;
-	setParentTransform(glm::rotate(getParentTransform(), -m_angvelocity.z * dt, glm::vec3(0, 0, 1)));
+
+	//Translation
+	m_acceleration = m_Ftotal / m_mass;
+	m_velocity += m_acceleration * dt;
 
 	m_wrotation = m_velocity.x / m_wradius * dt;
 
-	std::cout << "speed :" << ceil(m_velocity.x * 3.6f) << "kmh /  fps:" << ceil(1.0f / dt) << std::endl;
+	if (m_velocity.x > -0.05f && m_velocity.x < 0.05f)
+		reset();
+
+	//Update model
+	setParentTransform(glm::translate(getParentTransform(), m_velocity * dt));
+	setParentTransform(glm::rotate(getParentTransform(), -m_angvelocity.z * dt, glm::vec3(0, 0, 1)));
+
+	std::cout << "TX :" << m_velocity.x << " / TY :" << m_velocity.y << " / RZ :" << m_angvelocity.z << "Sigma :" << m_sigma << std::endl;
 }
 
 void Car::computeTotalForce() {
@@ -186,19 +187,19 @@ void Car::computeTotalForce() {
 		m_Ftotal.x += m_state.direction * m_brakes;
 	}
 	else if (m_state.direction == NONE) {
-		if (m_velocity.x > 0)
+		/*if (m_velocity.x > 0)
 			m_Ftotal.x -= m_brakes / 10;
 		else if (m_velocity.x < 0)
-			m_Ftotal.x += m_brakes / 10;
+			m_Ftotal.x += m_brakes / 10;*/
 	}
 }
 
 void Car::computeLateralForce() {
-	if (m_velocity.x > 0.1f) {
+	if (m_velocity.x > 0.0f) {
 		m_alphaF = atan((m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) - m_sigma;
 		m_alphaR = atan((m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
 	}
-	else if(m_velocity.x < -0.1f){
+	else if(m_velocity.x < 0.0f){
 		m_alphaF = -atan((m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) + m_sigma;
 		m_alphaR = -atan((m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
 	}
