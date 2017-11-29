@@ -13,8 +13,14 @@ HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderPr
 	std::vector<glm::vec2> texCoords;
 	read_obj(filename, m_positions, m_indices, m_normals, texCoords);
 	m_colors.resize(m_positions.size());
-	for (size_t i = 0; i<m_colors.size(); ++i)
-		m_colors[i] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	for (size_t i = 0; i < m_colors.size(); ++i) {
+		if (filename == "meshes/wheel.obj") {
+			float shade = (float)rand() / (float)RAND_MAX;
+			m_colors[i] = glm::vec4(shade, shade, shade, 1.0f);
+		}
+		else
+			m_colors[i] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	}
 
 	//Create buffers
 	glGenBuffers(1, &m_pBuffer); //vertices

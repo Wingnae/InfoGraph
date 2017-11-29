@@ -41,7 +41,7 @@ Viewer::Viewer(float width, float height) :
     m_window{
         sf::VideoMode(width, height),
         "Car",
-        sf::Style::Fullscreen,
+        sf::Style::Default,
         sf::ContextSettings{ 24 /* depth*/, 8 /*stencil*/, 4 /*anti aliasing level*/, 4 /*GL major version*/, 0 /*GL minor version*/}
 	},
     m_applicationRunning{ true }, m_animationLoop{ false }, m_animationIsStarted{ false },

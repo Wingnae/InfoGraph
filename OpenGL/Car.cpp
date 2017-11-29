@@ -2,7 +2,7 @@
 #include "Car.hpp"
 #include <math.h>
 
-Car::Car(ShaderProgramPtr shader, float mass, float engine, float brakes) : HierarchicalRenderable(shader), m_mass(mass), m_engine(engine), m_brakes(brakes) {
+Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRenderable(shader), m_mass(mass), m_engine(engine) {
 	//Car
 	setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
 	setLocalTransform(glm::mat4(1.0f));
@@ -123,9 +123,7 @@ void Car::do_animate(float time) {
 	m_lastTime = time;
 
 	float old_vel_x = m_velocity.x;
-	float old_vel_y = m_velocity.y;
-	float old_avel_z = m_angvelocity.z;
-	
+
 	//Wheel orientation
 	if (m_state.turn == NONE) {
 		if (abs(m_sigma) > abs(m_angvelocity.z * dt) && m_velocity.x > 0)
@@ -154,54 +152,59 @@ void Car::do_animate(float time) {
 
 	m_wrotation = m_velocity.x / m_wradius * dt;
 
-	if (m_velocity.x > -0.05f && m_velocity.x < 0.05f)
+	if (old_vel_x * m_velocity.x < 0)
 		reset();
 
 	//Update model
 	setParentTransform(glm::translate(getParentTransform(), m_velocity * dt));
 	setParentTransform(glm::rotate(getParentTransform(), -m_angvelocity.z * dt, glm::vec3(0, 0, 1)));
 
-	std::cout << "TX :" << m_velocity.x << " / TY :" << m_velocity.y << " / RZ :" << m_angvelocity.z << "Sigma :" << m_sigma << std::endl;
+	std::cout << "TX :" << m_velocity.x << "\t/ TY :" << m_velocity.y << "\t/ RZ :" << m_angvelocity.z << "\tSigma :" << m_sigma << std::endl;
 }
 
 void Car::computeTotalForce() {
+	computeTractionForce();
 	computeLateralForce();
 	computeDragForce();
 	computeResistanceForce();
 	//computeGravity();
-	m_Ftotal = m_Fdrag + m_Frr + m_Fg;
-	m_Ftotal.x += m_FlatF * sin(m_sigma);
-	m_Ftotal.y += m_FlatR + m_FlatF * cos(m_sigma);
 
-	if (m_state.direction == FORWARD && m_velocity.x >= 0) {
-		m_gear = GEAR1;
-		computeTractionForce();
-		m_Ftotal += m_Ftraction;
+	m_Ftotal = m_Ftraction + m_Fdrag + m_Frr;
+	if (abs(m_velocity.x) > 10.0f) {
+		m_Ftotal.x += m_FlatF * sin(m_sigma);
+		m_Ftotal.y += m_FlatR + m_FlatF * cos(m_sigma);
 	}
-	else if (m_state.direction == BACKWARD && m_velocity.x <= 0) {
-		m_gear = GEARR;
-		computeTractionForce();
-		m_Ftotal += m_Ftraction;
-	}
-	else if (m_state.direction != NONE) {
-		m_Ftotal.x += m_state.direction * m_brakes;
-	}
-	else if (m_state.direction == NONE) {
-		/*if (m_velocity.x > 0)
-			m_Ftotal.x -= m_brakes / 10;
+}
+
+void Car::computeTractionForce() {
+	if (m_state.direction == NONE) {
+		if (m_velocity.x > 0)
+			m_Ftraction.x = -BRAKES / 10;
 		else if (m_velocity.x < 0)
-			m_Ftotal.x += m_brakes / 10;*/
+			m_Ftraction.x = BRAKES / 10;
+		return;
 	}
+
+	if (m_state.direction == FORWARD && m_velocity.x >= 0)
+		m_gear = GEAR1;
+	else if (m_state.direction == BACKWARD && m_velocity.x <= 0)
+		m_gear = GEARR;
+	else {
+		m_Ftraction.x = m_state.direction * BRAKES;
+		return;
+	}
+	m_torque = m_state.direction * m_gear * m_engine;
+	m_Ftraction.x = m_torque / m_wradius;
 }
 
 void Car::computeLateralForce() {
 	if (m_velocity.x > 0.0f) {
-		m_alphaF = atan((m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) - m_sigma;
-		m_alphaR = atan((m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
+		m_alphaF = atan((-m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) - m_sigma;
+		m_alphaR = atan((-m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
 	}
 	else if(m_velocity.x < 0.0f){
-		m_alphaF = -atan((m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) + m_sigma;
-		m_alphaR = -atan((m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
+		m_alphaF = -atan((-m_velocity.y - m_angvelocity.z * FRONTCG) / m_velocity.x) + m_sigma;
+		m_alphaR = -atan((-m_velocity.y + m_angvelocity.z * REARCG) / m_velocity.x);
 	}
 	else {
 		m_alphaF = 0.0f;
@@ -213,11 +216,6 @@ void Car::computeLateralForce() {
 
 	m_FlatF *= m_mass * GRAVITY * FRONTCG / (FRONTCG + REARCG);
 	m_FlatR *= m_mass * GRAVITY * REARCG / (FRONTCG + REARCG);
-}
-
-void Car::computeTractionForce() {
-	m_torque = m_state.direction * m_gear * m_engine;
-	m_Ftraction.x = m_torque / m_wradius;
 }
 
 void Car::computeResistanceForce() {

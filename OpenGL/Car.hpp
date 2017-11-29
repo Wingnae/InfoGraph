@@ -4,18 +4,19 @@
 #include <Viewer.hpp>
 #include <HierarchicalMeshRenderable.hpp>
 
-#define GEAR1		40.0f
-#define GEARR		20.0f
-#define STEERING	90.0f
+#define GEAR1		30.0f
+#define GEARR		15.0f
+#define BRAKES		10000.0f
+#define STEERING	45.0f
 #define MAXSTEER	45.0f
 
 #define PI			3.141592653589793238463f
 #define GRAVITY		9.81f
-#define	CDRAG		5.0f
-#define CRR			5.0f
-#define CORNER		0.01f
+#define	CDRAG		10.0f
+#define CRR			100.0f
+#define CORNER		30.0f
 //#define BURN		1000.0f
-#define INERTIA		((FRONTCG * REARCG) * 10.0f)
+#define INERTIA		((FRONTCG * REARCG) * GRAVITY * 1000.0f)
 
 #define FRONTCG		0.98f
 #define REARCG		1.15f
@@ -28,7 +29,7 @@
 
 class Car : public HierarchicalRenderable, public std::enable_shared_from_this<Car> {
 public:
-	Car(ShaderProgramPtr shader, float mass, float engine, float brakes);
+	Car(ShaderProgramPtr shader, float mass, float engine);
 	void init();
 	void reset();
 	void do_keyPressedEvent(sf::Event& e);
@@ -52,7 +53,6 @@ private:
 	//Consts
 	const float m_mass;
 	const float m_engine;
-	const float m_brakes;
 
 	//Angles
 	float m_alphaF;
