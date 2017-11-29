@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\infograph">
+      <UniqueIdentifier>{03c3c43d-2833-4272-9ea0-f8ac05f89cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\infograph">
+      <UniqueIdentifier>{53a1ff2a-04c8-443a-9052-1ac273aec550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\infograph\dynamics">
+      <UniqueIdentifier>{e4de78eb-28cc-4ef7-a00d-75b3e74fc13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infograph\dynamics">
+      <UniqueIdentifier>{ddb8b211-2398-4619-b8dc-b1f101f5d263}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FPSCounter.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FrameRenderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GeometricTransformation.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\gl_helper.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HierarchicalRenderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Io.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\log.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShaderProgram.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tiny_obj_loader.h">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Viewer.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\KeyframeCollection.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\KeyframedMeshRenderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HierarchicalMeshRenderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hitbox.h">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\QuadRenderable.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\Collision.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ConstantForceField.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ConstantForceFieldRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ControlledForceFieldRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\DampingForceField.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\DynamicSystem.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\DynamicSystemRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\EulerExplicitSolver.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ForceField.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\Particle.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ParticleListRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ParticleParticleCollision.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ParticlePlaneCollision.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\ParticleRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\Solver.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\SpringForceField.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\SpringForceFieldRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dynamics\SpringListRenderable.hpp">
+      <Filter>Header Files\infograph\dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Plane.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FPSCounter.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FrameRenderable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GeometricTransformation.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gl_helper.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HierarchicalRenderable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Io.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\log.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShaderProgram.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Viewer.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KeyframeCollection.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\KeyframedMeshRenderable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HierarchicalMeshRenderable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Hitbox.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\QuadRendable.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\Collision.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ConstantForceField.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ConstantForceFieldRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ControlledForceFieldRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\DampingForceField.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\DynamicSystem.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\DynamicSystemRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\EulerExplicitSolver.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ForceField.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\Particle.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ParticleListRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ParticleParticleCollision.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ParticlePlaneCollision.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\ParticleRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\Solver.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\SpringForceField.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\SpringForceFieldRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dynamics\SpringListRenderable.cpp">
+      <Filter>Source Files\infograph\dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>Source Files\infograph</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\lightVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\lightFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\defaultFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\defaultVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

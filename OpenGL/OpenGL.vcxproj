@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{C64B413F-B6EB-45D5-8806-469A34EE7376}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SFML</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v141</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\pizon\Documents\Visual Studio 2017\Projects\InfoGraph\OpenGL\include;C:\Libraries\OpenGL\GLEW\include;C:\Libraries\OpenGL\GLM;C:\Libraries\OpenGL\GLAD\include;C:\Libraries\SFML32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Libraries\OpenGL\GLEW\lib\Release\Win32;C:\Libraries\SFML32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies);glew32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\pizon\Documents\Visual Studio 2017\Projects\InfoGraph\OpenGL\include;C:\Libraries\OpenGL\GLEW\include;C:\Libraries\OpenGL\GLM;C:\Libraries\OpenGL\GLAD\include;C:\Libraries\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Libraries\OpenGL\GLEW\lib\Release\x64;C:\Libraries\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;opengl32.lib;%(AdditionalDependencies);glew32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\pizon\Documents\Visual Studio 2017\Projects\InfoGraph\OpenGL\include;C:\Libraries\OpenGL\GLEW\include;C:\Libraries\OpenGL\GLM;C:\Libraries\OpenGL\GLAD\include;C:\Libraries\SFML32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Libraries\OpenGL\GLEW\lib\Release\Win32;C:\Libraries\SFML32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;opengl32.lib;%(AdditionalDependencies);glew32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\pizon\Documents\Visual Studio 2017\Projects\InfoGraph\OpenGL\include;C:\Libraries\OpenGL\GLEW\include;C:\Libraries\OpenGL\GLM;C:\Libraries\OpenGL\GLAD\include;C:\Libraries\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Libraries\OpenGL\GLEW\lib\Release\x64;C:\Libraries\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;opengl32.lib;%(AdditionalDependencies);glew32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Car.hpp" />
+    <ClInclude Include="include\dynamics\Collision.hpp" />
+    <ClInclude Include="include\dynamics\ConstantForceField.hpp" />
+    <ClInclude Include="include\dynamics\ConstantForceFieldRenderable.hpp" />
+    <ClInclude Include="include\dynamics\ControlledForceFieldRenderable.hpp" />
+    <ClInclude Include="include\dynamics\DampingForceField.hpp" />
+    <ClInclude Include="include\dynamics\DynamicSystem.hpp" />
+    <ClInclude Include="include\dynamics\DynamicSystemRenderable.hpp" />
+    <ClInclude Include="include\dynamics\EulerExplicitSolver.hpp" />
+    <ClInclude Include="include\dynamics\ForceField.hpp" />
+    <ClInclude Include="include\dynamics\Particle.hpp" />
+    <ClInclude Include="include\dynamics\ParticleListRenderable.hpp" />
+    <ClInclude Include="include\dynamics\ParticleParticleCollision.hpp" />
+    <ClInclude Include="include\dynamics\ParticlePlaneCollision.hpp" />
+    <ClInclude Include="include\dynamics\ParticleRenderable.hpp" />
+    <ClInclude Include="include\dynamics\Solver.hpp" />
+    <ClInclude Include="include\dynamics\SpringForceField.hpp" />
+    <ClInclude Include="include\dynamics\SpringForceFieldRenderable.hpp" />
+    <ClInclude Include="include\dynamics\SpringListRenderable.hpp" />
+    <ClInclude Include="include\HierarchicalMeshRenderable.hpp" />
+    <ClInclude Include="include\Hitbox.h" />
+    <ClInclude Include="include\Plane.hpp" />
+    <ClInclude Include="include\QuadRenderable.hpp" />
+    <ClInclude Include="World.hpp" />
+    <ClInclude Include="include\Camera.hpp" />
+    <ClInclude Include="include\FPSCounter.hpp" />
+    <ClInclude Include="include\FrameRenderable.hpp" />
+    <ClInclude Include="include\GeometricTransformation.hpp" />
+    <ClInclude Include="include\gl_helper.hpp" />
+    <ClInclude Include="include\HierarchicalRenderable.hpp" />
+    <ClInclude Include="include\Io.hpp" />
+    <ClInclude Include="include\KeyframeCollection.hpp" />
+    <ClInclude Include="include\KeyframedMeshRenderable.hpp" />
+    <ClInclude Include="include\Light.hpp" />
+    <ClInclude Include="include\log.hpp" />
+    <ClInclude Include="include\Renderable.hpp" />
+    <ClInclude Include="include\ShaderProgram.hpp" />
+    <ClInclude Include="include\tiny_obj_loader.h" />
+    <ClInclude Include="include\Utils.hpp" />
+    <ClInclude Include="include\Viewer.hpp" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Car.cpp" />
+    <ClCompile Include="src\dynamics\Collision.cpp" />
+    <ClCompile Include="src\dynamics\ConstantForceField.cpp" />
+    <ClCompile Include="src\dynamics\ConstantForceFieldRenderable.cpp" />
+    <ClCompile Include="src\dynamics\ControlledForceFieldRenderable.cpp" />
+    <ClCompile Include="src\dynamics\DampingForceField.cpp" />
+    <ClCompile Include="src\dynamics\DynamicSystem.cpp" />
+    <ClCompile Include="src\dynamics\DynamicSystemRenderable.cpp" />
+    <ClCompile Include="src\dynamics\EulerExplicitSolver.cpp" />
+    <ClCompile Include="src\dynamics\ForceField.cpp" />
+    <ClCompile Include="src\dynamics\Particle.cpp" />
+    <ClCompile Include="src\dynamics\ParticleListRenderable.cpp" />
+    <ClCompile Include="src\dynamics\ParticleParticleCollision.cpp" />
+    <ClCompile Include="src\dynamics\ParticlePlaneCollision.cpp" />
+    <ClCompile Include="src\dynamics\ParticleRenderable.cpp" />
+    <ClCompile Include="src\dynamics\Solver.cpp" />
+    <ClCompile Include="src\dynamics\SpringForceField.cpp" />
+    <ClCompile Include="src\dynamics\SpringForceFieldRenderable.cpp" />
+    <ClCompile Include="src\dynamics\SpringListRenderable.cpp" />
+    <ClCompile Include="src\HierarchicalMeshRenderable.cpp" />
+    <ClCompile Include="src\Hitbox.cpp" />
+    <ClCompile Include="src\Plane.cpp" />
+    <ClCompile Include="src\QuadRendable.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\FPSCounter.cpp" />
+    <ClCompile Include="src\FrameRenderable.cpp" />
+    <ClCompile Include="src\GeometricTransformation.cpp" />
+    <ClCompile Include="src\gl_helper.cpp" />
+    <ClCompile Include="src\HierarchicalRenderable.cpp" />
+    <ClCompile Include="src\Io.cpp" />
+    <ClCompile Include="src\KeyframeCollection.cpp" />
+    <ClCompile Include="src\KeyframedMeshRenderable.cpp" />
+    <ClCompile Include="src\Light.cpp" />
+    <ClCompile Include="src\log.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
+    <ClCompile Include="src\ShaderProgram.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
+    <ClCompile Include="src\Viewer.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\defaultFragment.glsl" />
+    <None Include="shaders\lightFragment.glsl" />
+    <None Include="shaders\lightVertex.glsl" />
+    <None Include="shaders\defaultVertex.glsl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
