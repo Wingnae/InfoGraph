@@ -8,7 +8,7 @@ The project is made entirely with OpenGL, the render engine was made in class th
 ## What's done :
 Car controller  
 Physics based car movement (Mostly inspired by the following thesis https://goo.gl/uhwnxg)  
-Basic lightning  
+Basic lighting  
 
 ## What's next :
 Basic collisions  
