@@ -4,7 +4,7 @@
 #include <Viewer.hpp>
 #include <HierarchicalMeshRenderable.hpp>
 
-class World : public HierarchicalRenderable, public std::enable_shared_from_this<World> {
+class World : public HierarchicalRenderable {
 private:
 	HierarchicalMeshRenderablePtr ground;
 	HierarchicalMeshRenderablePtr boxes[20];

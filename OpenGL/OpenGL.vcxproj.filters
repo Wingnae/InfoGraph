@@ -87,9 +87,6 @@
     <ClInclude Include="include\HierarchicalMeshRenderable.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
-    <ClInclude Include="include\Hitbox.h">
-      <Filter>Header Files\infograph</Filter>
-    </ClInclude>
     <ClInclude Include="include\QuadRenderable.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
@@ -148,6 +145,9 @@
       <Filter>Header Files\infograph\dynamics</Filter>
     </ClInclude>
     <ClInclude Include="include\Plane.hpp">
+      <Filter>Header Files\infograph</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hitbox.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
   </ItemGroup>

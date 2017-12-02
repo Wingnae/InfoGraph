@@ -3,6 +3,7 @@
 #include "./../include/Viewer.hpp"
 #include <glm/gtc/type_ptr.hpp>
 #include <GL/glew.h>
+#include <Hitbox.hpp>
 
 HierarchicalRenderable::~HierarchicalRenderable(){}
 
@@ -98,4 +99,16 @@ void HierarchicalRenderable::addChild( HierarchicalRenderablePtr parent, Hierarc
 std::vector< HierarchicalRenderablePtr > & HierarchicalRenderable::getChildren()
 {
     return m_children;
+}
+
+void HierarchicalRenderable::generateHitbox() {
+	for (auto c : m_children) {
+		c->generateHitbox();
+	}
+	m_hitbox = std::make_shared<Hitbox>(m_shaderProgram, shared_from_this());
+	HierarchicalRenderable::addChild(shared_from_this(), m_hitbox);
+}
+
+HierarchicalRenderablePtr HierarchicalRenderable::shared_from_this(){
+	return std::static_pointer_cast<HierarchicalRenderable>(Renderable::shared_from_this());
 }

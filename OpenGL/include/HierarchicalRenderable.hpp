@@ -8,11 +8,13 @@
  * be made of several renderables.
  */
 
-#include "Renderable.hpp"
+#include <Renderable.hpp>
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>
 
+class Hitbox;
+typedef std::shared_ptr<Hitbox> HitboxPtr;
 class HierarchicalRenderable;
 typedef std::shared_ptr<HierarchicalRenderable> HierarchicalRenderablePtr;
 
@@ -145,6 +147,10 @@ public :
      * @return A vector of hierarchical renderable shared pointers. */
     std::vector< HierarchicalRenderablePtr > & getChildren();
 
+	virtual void generateHitbox();
+
+	virtual HierarchicalRenderablePtr shared_from_this();
+
 private:
 
     /**@brief Pointer to the parent renderable.
@@ -193,7 +199,7 @@ private:
      */
     virtual void afterAnimate( float time );
 
+	HitboxPtr m_hitbox;
 };
-typedef std::shared_ptr<HierarchicalRenderable> HierarchicalRenderablePtr;
 
 #endif

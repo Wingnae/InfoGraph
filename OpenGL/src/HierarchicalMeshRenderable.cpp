@@ -8,7 +8,7 @@
 #include <GL/glew.h>
 
 HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderProgram, const std::string& filename) :
-	HierarchicalRenderable(shaderProgram), m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_iBuffer(0)
+	HierarchicalRenderable(shaderProgram)
 {
 	std::vector<glm::vec2> texCoords;
 	read_obj(filename, m_positions, m_indices, m_normals, texCoords);

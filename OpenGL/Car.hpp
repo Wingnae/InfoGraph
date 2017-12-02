@@ -14,9 +14,8 @@
 #define GRAVITY		9.81f
 #define	CDRAG		10.0f
 #define CRR			100.0f
-#define CORNER		30.0f
-//#define BURN		1000.0f
-#define INERTIA		((FRONTCG * REARCG) * GRAVITY * 1000.0f)
+#define CORNER		0.01f
+#define INERTIA		(FRONTCG * REARCG)
 
 #define FRONTCG		0.98f
 #define REARCG		1.15f
@@ -27,7 +26,7 @@
 #define LEFT		1
 #define RIGHT		-1
 
-class Car : public HierarchicalRenderable, public std::enable_shared_from_this<Car> {
+class Car : public HierarchicalRenderable {
 public:
 	Car(ShaderProgramPtr shader, float mass, float engine);
 	void init();

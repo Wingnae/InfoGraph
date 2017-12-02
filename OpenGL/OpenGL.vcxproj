@@ -175,7 +175,7 @@
     <ClInclude Include="include\dynamics\SpringForceFieldRenderable.hpp" />
     <ClInclude Include="include\dynamics\SpringListRenderable.hpp" />
     <ClInclude Include="include\HierarchicalMeshRenderable.hpp" />
-    <ClInclude Include="include\Hitbox.h" />
+    <ClInclude Include="include\Hitbox.hpp" />
     <ClInclude Include="include\Plane.hpp" />
     <ClInclude Include="include\QuadRenderable.hpp" />
     <ClInclude Include="World.hpp" />

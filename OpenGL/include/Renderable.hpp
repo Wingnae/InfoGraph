@@ -14,11 +14,12 @@
 
 #include "ShaderProgram.hpp"
 #include <SFML/Graphics.hpp>
-
 /* Forward declaration of the Viewer class in order to store a pointer to a
  * renderable's viewer and to define this class as a friend of Renderable.
  */
 class Viewer;
+class Hitbox;
+typedef std::shared_ptr<Hitbox> HitboxPtr;
 
 /**
  * @brief Renderable interface.
@@ -61,7 +62,7 @@ class Viewer;
  *
  * \sa HierarchicalRenderable
  */
-class Renderable
+class Renderable : public std::enable_shared_from_this<Renderable>
 {
 public:
     /** @name Construction/Destruction of renderable instances.*/
@@ -212,6 +213,8 @@ public:
 
     //void displayTextInViewer(std::string text) const;
 
+	const std::vector<glm::vec3>& getPositions() const;
+
 private:
     /** @name Private viewer interface.
      * According to guideline #1, we have used the Template method. Now we are
@@ -328,6 +331,16 @@ protected:
      */
     friend Viewer;
     Viewer* m_viewer; /*!< Viewer instance that manage this renderable */
+
+	std::vector< glm::vec3 > m_positions;
+	std::vector< glm::vec3 > m_normals;
+	std::vector< glm::vec4 > m_colors;
+	std::vector< unsigned int > m_indices;
+
+	unsigned int m_pBuffer;
+	unsigned int m_cBuffer;
+	unsigned int m_nBuffer;
+	unsigned int m_iBuffer;
 };
 
 typedef std::shared_ptr<Renderable> RenderablePtr; /*!< Typedef for smart pointer to renderable.*/

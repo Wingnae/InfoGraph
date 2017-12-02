@@ -52,6 +52,7 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRender
 
 void Car::init() {
 	HierarchicalRenderable::addChild(shared_from_this(), m_frame);
+	generateHitbox();
 }
 
 void Car::reset() {
@@ -152,7 +153,7 @@ void Car::do_animate(float time) {
 
 	m_wrotation = m_velocity.x / m_wradius * dt;
 
-	if (old_vel_x * m_velocity.x < 0)
+	if (old_vel_x * m_velocity.x < 0.0f)
 		reset();
 
 	//Update model
