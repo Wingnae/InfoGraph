@@ -12,6 +12,9 @@ HierarchicalRenderable::HierarchicalRenderable(ShaderProgramPtr shaderProgram) :
     m_parentTransform( glm::mat4(1.0) ), m_localTransform( glm::mat4(1.0) )
 {}
 
+void HierarchicalRenderable::init() {
+	HierarchicalRenderable::addChild(shared_from_this(), m_hitbox);
+}
 
 const glm::mat4& HierarchicalRenderable::getParentTransform() const
 {
@@ -101,14 +104,22 @@ std::vector< HierarchicalRenderablePtr > & HierarchicalRenderable::getChildren()
     return m_children;
 }
 
-void HierarchicalRenderable::generateHitbox() {
-	for (auto c : m_children) {
-		c->generateHitbox();
-	}
-	m_hitbox = std::make_shared<Hitbox>(m_shaderProgram, shared_from_this());
-	HierarchicalRenderable::addChild(shared_from_this(), m_hitbox);
-}
-
 HierarchicalRenderablePtr HierarchicalRenderable::shared_from_this(){
 	return std::static_pointer_cast<HierarchicalRenderable>(Renderable::shared_from_this());
+}
+
+HitboxPtr HierarchicalRenderable::getHitbox() {
+	return m_hitbox;
+}
+
+void HierarchicalRenderable::do_keyPressedEvent(sf::Event& e) {
+	for (auto c : m_children) {
+		c->do_keyPressedEvent(e);
+	}
+}
+
+void HierarchicalRenderable::do_keyReleasedEvent(sf::Event& e) {
+	for (auto c : m_children) {
+		c->do_keyReleasedEvent(e);
+	}
 }

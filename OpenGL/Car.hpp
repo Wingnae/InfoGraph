@@ -14,7 +14,7 @@
 #define GRAVITY		9.81f
 #define	CDRAG		10.0f
 #define CRR			100.0f
-#define CORNER		0.01f
+#define CORNER		0.002f
 #define INERTIA		(FRONTCG * REARCG)
 
 #define FRONTCG		0.98f

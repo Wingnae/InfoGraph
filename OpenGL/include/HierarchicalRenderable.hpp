@@ -71,6 +71,8 @@ public :
      */
     HierarchicalRenderable(ShaderProgramPtr shaderProgram);
 
+	void init();
+
     /** @brief Set hierarchical relationship between two HierarchicalRenderable instances.
      *
      * This function adds \a child to the m_children of \a parent and set the m_parent member
@@ -147,11 +149,14 @@ public :
      * @return A vector of hierarchical renderable shared pointers. */
     std::vector< HierarchicalRenderablePtr > & getChildren();
 
-	virtual void generateHitbox();
-
 	virtual HierarchicalRenderablePtr shared_from_this();
 
-private:
+	HitboxPtr getHitbox();
+
+	void do_keyPressedEvent(sf::Event& e);
+	void do_keyReleasedEvent(sf::Event& e);
+
+protected:
 
     /**@brief Pointer to the parent renderable.
      *

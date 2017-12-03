@@ -144,7 +144,3 @@ void Renderable::rotate(float angle, float x, float y, float z) {
 void Renderable::scale(float x, float y, float z) {
 	setModelMatrix(glm::scale(getModelMatrix(), glm::vec3(x, y , z)));
 }
-
-const std::vector<glm::vec3>& Renderable::getPositions() const {
-	return m_positions;
-}

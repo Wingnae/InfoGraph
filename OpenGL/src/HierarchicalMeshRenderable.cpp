@@ -6,6 +6,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <GL/glew.h>
+#include <Hitbox.hpp>
 
 HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderProgram, const std::string& filename) :
 	HierarchicalRenderable(shaderProgram)
@@ -21,6 +22,8 @@ HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderPr
 		else
 			m_colors[i] = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	}
+
+	m_hitbox = std::make_shared<Hitbox>(shaderProgram, m_positions);
 
 	//Create buffers
 	glGenBuffers(1, &m_pBuffer); //vertices

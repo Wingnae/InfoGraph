@@ -213,8 +213,6 @@ public:
 
     //void displayTextInViewer(std::string text) const;
 
-	const std::vector<glm::vec3>& getPositions() const;
-
 private:
     /** @name Private viewer interface.
      * According to guideline #1, we have used the Template method. Now we are

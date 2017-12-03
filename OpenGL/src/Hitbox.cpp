@@ -2,11 +2,12 @@
 #include <gl_helper.hpp>
 #include <GL/glew.h>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
-Hitbox::Hitbox(ShaderProgramPtr program, HierarchicalRenderablePtr source) : HierarchicalRenderable(program), m_source(source){
+Hitbox::Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos) : HierarchicalRenderable(program) {
 	float maxX = 0.0f, minX = 0.0f, maxY = 0.0f, minY = 0.0f, maxZ = 0.0f, minZ = 0.0f;
 
-	for (const glm::vec3& p : m_source->getPositions()) {
+	for (const glm::vec3& p : pos) {
 		if (maxX < p.x) maxX = p.x;
 		if (minX > p.x) minX = p.x;
 
@@ -51,6 +52,48 @@ Hitbox::Hitbox(ShaderProgramPtr program, HierarchicalRenderablePtr source) : Hie
 	glcheck(glBufferData(GL_ARRAY_BUFFER, m_normals.size() * sizeof(glm::vec3), m_normals.data(), GL_STATIC_DRAW));
 	glcheck(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iBuffer));
 	glcheck(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(glm::ivec4), m_indices.data(), GL_STATIC_DRAW));
+}
+
+bool Hitbox::collide(const HitboxPtr hb) {
+	float maxX = 0.0f, minX = 0.0f, maxY = 0.0f, minY = 0.0f, maxZ = 0.0f, minZ = 0.0f;
+	float maxX2 = 0.0f, minX2 = 0.0f, maxY2 = 0.0f, minY2 = 0.0f, maxZ2 = 0.0f, minZ2 = 0.0f;
+
+	for (const glm::vec3& p : m_positions) {
+		glm::vec3 realP = glm::vec3(m_model * glm::vec4(p, 1.0f));
+
+		if (maxX < realP.x) maxX = realP.x;
+		if (minX > realP.x) minX = realP.x;
+
+		if (maxY < realP.y) maxY = realP.y;
+		if (minY > realP.y) minY = realP.y;
+
+		if (maxZ < realP.z) maxZ = realP.z;
+		if (minZ > realP.z) minZ = realP.z;
+	}
+	for (const glm::vec3& p : hb->m_positions) {
+		glm::vec3 realP = glm::vec3(hb->m_model * glm::vec4(p, 1.0f));
+
+		if (maxX2 < realP.x) maxX2 = realP.x;
+		if (minX2 > realP.x) minX2 = realP.x;
+
+		if (maxY2 < realP.y) maxY2 = realP.y;
+		if (minY2 > realP.y) minY2 = realP.y;
+
+		if (maxZ2 < realP.z) maxZ2 = realP.z;
+		if (minZ2 > realP.z) minZ2 = realP.z;
+	}
+
+	//SAT x
+	if (maxX < minX2 || maxX2 < minX)
+		return false;
+	//SAT y
+	if (maxY < minY2 ||  maxY2 < minY)
+		return false;
+	//SAT z
+	if (maxZ < minZ2 ||  maxZ2 < minZ)
+		return false;
+
+	return true;
 }
 
 void Hitbox::do_draw() {

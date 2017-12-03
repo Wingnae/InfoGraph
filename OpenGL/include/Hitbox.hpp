@@ -5,13 +5,12 @@
 class Hitbox : public HierarchicalRenderable {
 public:
 	~Hitbox();
-	Hitbox(ShaderProgramPtr program, HierarchicalRenderablePtr source);
+	Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos);
+	bool collide(const HitboxPtr rhs);
 
 private:
 	virtual void do_draw();
 	virtual void do_animate(float time);
-
-	HierarchicalRenderablePtr m_source;
 
 	std::vector< glm::vec3 > m_positions;
 	std::vector< glm::vec3 > m_normals;

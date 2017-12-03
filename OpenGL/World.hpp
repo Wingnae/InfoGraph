@@ -3,11 +3,13 @@
 #include <ShaderProgram.hpp>
 #include <Viewer.hpp>
 #include <HierarchicalMeshRenderable.hpp>
+#include "Car.hpp"
 
 class World : public HierarchicalRenderable {
 private:
 	HierarchicalMeshRenderablePtr ground;
-	HierarchicalMeshRenderablePtr boxes[20];
+	std::vector<HierarchicalMeshRenderablePtr> boxes;
+	CarPtr car;
 
 public:
 	World(ShaderProgramPtr shader);
@@ -15,6 +17,7 @@ public:
 
 	void do_draw();
 	void do_animate(float time);
+	void afterAnimate(float time);
 };
 
 typedef std::shared_ptr<World> WorldPtr;
