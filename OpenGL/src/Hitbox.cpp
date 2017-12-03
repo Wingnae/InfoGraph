@@ -4,28 +4,32 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
+#define MAXFLOAT	std::numeric_limits<float>::max()
+
 Hitbox::Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos) : HierarchicalRenderable(program) {
-	float maxX = 0.0f, minX = 0.0f, maxY = 0.0f, minY = 0.0f, maxZ = 0.0f, minZ = 0.0f;
+	m_maxX = -MAXFLOAT, m_minX = MAXFLOAT, m_maxY = -MAXFLOAT, m_minY = MAXFLOAT, m_maxZ = -MAXFLOAT, m_minZ = MAXFLOAT;
 
 	for (const glm::vec3& p : pos) {
-		if (maxX < p.x) maxX = p.x;
-		if (minX > p.x) minX = p.x;
+		if (m_maxX < p.x) m_maxX = p.x;
+		if (m_minX > p.x) m_minX = p.x;
 
-		if (maxY < p.y) maxY = p.y;
-		if (minY > p.y) minY = p.y;
+		if (m_maxY < p.y) m_maxY = p.y;
+		if (m_minY > p.y) m_minY = p.y;
 
-		if (maxZ < p.z) maxZ = p.z;
-		if (minZ > p.z) minZ = p.z;
+		if (m_maxZ < p.z) m_maxZ = p.z;
+		if (m_minZ > p.z) m_minZ = p.z;
 	}
 
-	m_positions.push_back(glm::vec3(minX, minY, minZ));
-	m_positions.push_back(glm::vec3(minX, minY, maxZ));
-	m_positions.push_back(glm::vec3(minX, maxY, maxZ));
-	m_positions.push_back(glm::vec3(minX, maxY, minZ));
-	m_positions.push_back(glm::vec3(maxX, maxY, minZ));
-	m_positions.push_back(glm::vec3(maxX, maxY, maxZ));
-	m_positions.push_back(glm::vec3(maxX, minY, maxZ));
-	m_positions.push_back(glm::vec3(maxX, minY, minZ));
+	m_center = glm::vec3((m_maxX - m_minX) / 2, (m_maxY - m_minY) / 2, (m_maxZ - m_minZ) / 2);
+
+	m_positions.push_back(glm::vec3(m_minX, m_minY, m_minZ));
+	m_positions.push_back(glm::vec3(m_minX, m_minY, m_maxZ));
+	m_positions.push_back(glm::vec3(m_minX, m_maxY, m_maxZ));
+	m_positions.push_back(glm::vec3(m_minX, m_maxY, m_minZ));
+	m_positions.push_back(glm::vec3(m_maxX, m_maxY, m_minZ));
+	m_positions.push_back(glm::vec3(m_maxX, m_maxY, m_maxZ));
+	m_positions.push_back(glm::vec3(m_maxX, m_minY, m_maxZ));
+	m_positions.push_back(glm::vec3(m_maxX, m_minY, m_minZ));
 
 	for (const glm::vec3& p : m_positions) {
 		m_normals.push_back(glm::normalize(p));
@@ -54,46 +58,66 @@ Hitbox::Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos) : Hierarch
 	glcheck(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(glm::ivec4), m_indices.data(), GL_STATIC_DRAW));
 }
 
-bool Hitbox::collide(const HitboxPtr hb) {
-	float maxX = 0.0f, minX = 0.0f, maxY = 0.0f, minY = 0.0f, maxZ = 0.0f, minZ = 0.0f;
-	float maxX2 = 0.0f, minX2 = 0.0f, maxY2 = 0.0f, minY2 = 0.0f, maxZ2 = 0.0f, minZ2 = 0.0f;
+glm::vec3 Hitbox::collide(const HitboxPtr hb) const {
+	std::vector<glm::vec3> realP(m_positions.size()), realP2(hb->m_positions.size());
 
-	for (const glm::vec3& p : m_positions) {
-		glm::vec3 realP = glm::vec3(m_model * glm::vec4(p, 1.0f));
+	for (int i = 0; i < m_positions.size(); i++)
+		realP[i] = glm::vec3(m_model * glm::vec4(m_positions[i], 1.0f));
+	for (int i = 0; i < hb->m_positions.size(); i++)
+		realP2[i] = glm::vec3(hb->m_model * glm::vec4(hb->m_positions[i], 1.0f));
+	
+	//SAT X1
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP[7] - realP[0])))
+		return glm::vec3(0.0f);
+	//SAT Y1
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP[3] - realP[0])))
+		return glm::vec3(0.0f);
+	//SAT Z1
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP[1] - realP[0])))
+		return glm::vec3(0.0f);
 
-		if (maxX < realP.x) maxX = realP.x;
-		if (minX > realP.x) minX = realP.x;
+	//SAT X2
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP2[7] - realP2[0])))
+		return glm::vec3(0.0f);
+	//SAT Y2
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP2[3] - realP2[0])))
+		return glm::vec3(0.0f);
+	//SAT Z2
+	if (!collideAlongAxis(realP, realP2, glm::normalize(realP2[1] - realP2[0])))
+		return glm::vec3(0.0f);
 
-		if (maxY < realP.y) maxY = realP.y;
-		if (minY > realP.y) minY = realP.y;
+	glm::vec3 realCenter = m_model * glm::vec4(m_center, 1.0);
+	glm::vec3 realCenter2 = hb->m_model * glm::vec4(hb->m_center, 1.0);
+	glm::vec3 diffCenter = realCenter2 - realCenter;
 
-		if (maxZ < realP.z) maxZ = realP.z;
-		if (minZ > realP.z) minZ = realP.z;
+	
+
+}
+
+bool Hitbox::collideAlongAxis(const std::vector<glm::vec3>& a, const std::vector<glm::vec3>& b, glm::vec3& axis) const {
+	// Handles the cross product = {0,0,0} case
+	if (axis == glm::vec3(0, 0, 0))
+		return true;
+
+	float aMin = MAXFLOAT;
+	float aMax = -MAXFLOAT;
+	float bMin = MAXFLOAT;
+	float bMax = -MAXFLOAT;
+
+	// Define two intervals, a and b. Calculate their min and max values
+	for (int i = 0; i < a.size(); i++) {
+		float aDist = glm::dot(a[i], axis);
+		aMin = (aDist < aMin) ? aDist : aMin;
+		aMax = (aDist > aMax) ? aDist : aMax;
+		float bDist = glm::dot(b[i], axis);
+		bMin = (bDist < bMin) ? bDist : bMin;
+		bMax = (bDist > bMax) ? bDist : bMax;
 	}
-	for (const glm::vec3& p : hb->m_positions) {
-		glm::vec3 realP = glm::vec3(hb->m_model * glm::vec4(p, 1.0f));
 
-		if (maxX2 < realP.x) maxX2 = realP.x;
-		if (minX2 > realP.x) minX2 = realP.x;
-
-		if (maxY2 < realP.y) maxY2 = realP.y;
-		if (minY2 > realP.y) minY2 = realP.y;
-
-		if (maxZ2 < realP.z) maxZ2 = realP.z;
-		if (minZ2 > realP.z) minZ2 = realP.z;
-	}
-
-	//SAT x
-	if (maxX < minX2 || maxX2 < minX)
-		return false;
-	//SAT y
-	if (maxY < minY2 ||  maxY2 < minY)
-		return false;
-	//SAT z
-	if (maxZ < minZ2 ||  maxZ2 < minZ)
-		return false;
-
-	return true;
+	// One-dimensional intersection test between a and b
+	float longSpan = std::max(aMax, bMax) - std::min(aMin, bMin);
+	float sumSpan = aMax - aMin + bMax - bMin;
+	return longSpan < sumSpan;
 }
 
 void Hitbox::do_draw() {

@@ -103,3 +103,12 @@ HierarchicalMeshRenderable::~HierarchicalMeshRenderable()
 	glcheck(glDeleteBuffers(1, &m_nBuffer));
 	glcheck(glDeleteBuffers(1, &m_iBuffer));
 }
+
+void HierarchicalMeshRenderable::setColor(glm::vec4 & col) {
+	if (m_colors[0] != col) {
+		for (int i = 0; i < m_colors.size(); i++)
+			m_colors[i] = col;
+		glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_cBuffer));
+		glcheck(glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(glm::vec4), m_colors.data(), GL_STATIC_DRAW));
+	}
+}

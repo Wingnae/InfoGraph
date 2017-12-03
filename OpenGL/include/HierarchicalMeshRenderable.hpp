@@ -12,6 +12,7 @@ class HierarchicalMeshRenderable : public HierarchicalRenderable
 public:
 	~HierarchicalMeshRenderable();
 	HierarchicalMeshRenderable(ShaderProgramPtr program, const std::string& filename);
+	void setColor(glm::vec4& col);
 
 private:
 	void do_draw();

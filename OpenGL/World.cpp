@@ -23,6 +23,9 @@ World::World(ShaderProgramPtr shader) : HierarchicalRenderable(shader) {
 void World::init() {
 	HierarchicalRenderable::addChild(shared_from_this(), ground);
 	HierarchicalRenderable::addChild(shared_from_this(), car);
+	ground->getHitbox()->updateModelMatrix();
+	for (auto b : boxes)
+		b->getHitbox()->updateModelMatrix();
 }
 
 void World::do_draw() {
@@ -37,8 +40,13 @@ void World::afterAnimate(float time) {
 	for (size_t i = 0; i<m_children.size(); ++i)
 		m_children[i]->animate(time);
 	for (int i = 0; i < boxes.size(); i++) {
-		if (boxes[i]->getHitbox()->collide(car->getHitbox())) {
-			//std::cout << "collision" << i << std::endl;
+		auto col = car->getHitbox()->collide(boxes[i]->getHitbox());
+		if (col != glm::vec3(0.0f)) {
+			boxes[i]->setColor(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+			std::cout << col.x << " " << col.y << " " << col.z << std::endl;
+		}
+		else {
+			boxes[i]->setColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 		}
 	}
 }

@@ -5,7 +5,7 @@
 
 Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRenderable(shader), m_mass(mass), m_engine(engine) {
 	//Car
-	setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 1.0f)));
+	setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f)));
 
 	//Frame
 	m_frame = std::make_shared<HierarchicalMeshRenderable>(shader, "meshes/car.obj");
@@ -22,7 +22,7 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRender
 	m_wheels[1]->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(FRONTCG, -0.8, 0)));
 	m_wheels[2]->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(-REARCG, 0.8, 0)));
 	m_wheels[3]->setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(-REARCG, -0.8, 0)));
-	
+
 	m_state.direction = NONE;
 	m_state.turn = NONE;
 
@@ -52,6 +52,10 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRender
 void Car::init() {
 	HierarchicalRenderable::addChild(shared_from_this(), m_frame);
 	m_hitbox = m_frame->getHitbox();
+	m_hitbox->updateModelMatrix();
+	m_frame->getHitbox()->updateModelMatrix();
+	for (auto w : m_wheels)
+		w->getHitbox()->updateModelMatrix();
 }
 
 void Car::reset() {
@@ -154,9 +158,6 @@ void Car::do_animate(float time) {
 
 	if (old_vel_x * m_velocity.x < 0.0f)
 		reset();
-	
-	if (m_wheels[0]->getHitbox()->collide(m_wheels[1]->getHitbox()))
-		std::cout << "collision" << std::endl;
 
 	//Update model
 	setParentTransform(glm::translate(getParentTransform(), m_velocity * dt));

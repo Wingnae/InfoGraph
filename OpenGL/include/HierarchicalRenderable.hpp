@@ -156,6 +156,7 @@ public :
 	void do_keyPressedEvent(sf::Event& e);
 	void do_keyReleasedEvent(sf::Event& e);
 
+
 protected:
 
     /**@brief Pointer to the parent renderable.
