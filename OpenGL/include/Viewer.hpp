@@ -10,7 +10,7 @@
 
 #include "Renderable.hpp"
 #include "Camera.hpp"
-#include "Light.hpp"
+#include "lighting/Light.hpp"
 //#include "TextEngine.hpp"
 #include "FPSCounter.hpp"
 
@@ -35,25 +35,6 @@
 class Viewer
 {
 public:
-	/**@brief Hold important state of the keyboard.
-	*
-	* This class holds some state of the keyboard to be used to control
-	* the camera in Camera::SPACESHIP_BEHAVIOR.
-	*/
-	struct KeyboardState {
-		bool forward;
-		bool backward;
-		bool left;
-		bool right;
-		bool slow;
-		bool fast;
-
-		glm::vec3 direction;
-		float speed;
-
-		KeyboardState();
-	};
-
     /** We use the system_clock of std::chrono to compute durations.
      * chrono is a nice addition to the c++ std, go have a look there:
      * http://www.cplusplus.com/reference/chrono/
@@ -139,8 +120,7 @@ public:
      * Manage mouse, keyboards and window events.
      */
     void handleEvent();
-
-	KeyboardState getKeyboardState();
+    /**@}*/
 
     /**@name Utilities
      * @{*/
@@ -294,6 +274,10 @@ private:
 
     std::unordered_set< ShaderProgramPtr > m_programs;
 
+    //TextEngine m_tengine; /*!< Engine to display textual information. */
+    //TimePoint m_modeInformationTextDisappearanceTime; /*!< Duration of appearance for textual information in seconds. */
+    //std::string m_modeInformationText; /*!< Textual information that will be displayed. */
+
     bool m_applicationRunning; /*!< Boolean that runs the main animation loop. Always true except when closing the application. */
     bool m_animationLoop; /*!< True if the animation loops after a given duration, \ref m_loopDuration. */
     bool m_animationIsStarted; /*!< True if the animation is running. False otherwise. */
@@ -308,6 +292,25 @@ private:
 
     FPSCounter m_fpsCounter; /*!< A framerate counter */
     bool m_helpDisplayed;
+
+    /**@brief Hold important state of the keyboard.
+     *
+     * This class holds some state of the keyboard to be used to control
+     * the camera in Camera::SPACESHIP_BEHAVIOR.
+     */
+    struct KeyboardState {
+      bool forward;
+      bool backward;
+      bool left;
+      bool right;
+      bool slow;
+      bool fast;
+
+      glm::vec3 direction;
+      float speed;
+
+      KeyboardState();
+    };
 
     KeyboardState keyboard; /*!< Help us to smoothly control the camera with the keyboard. */
     TimePoint m_lastEventHandleTime; /*!< Last time all input events were handled.*/

@@ -176,6 +176,14 @@
     <ClInclude Include="include\dynamics\SpringListRenderable.hpp" />
     <ClInclude Include="include\HierarchicalMeshRenderable.hpp" />
     <ClInclude Include="include\Hitbox.hpp" />
+    <ClInclude Include="include\lighting\DirectionalLightRenderable.hpp" />
+    <ClInclude Include="include\lighting\Light.hpp" />
+    <ClInclude Include="include\lighting\LightedCubeRenderable.hpp" />
+    <ClInclude Include="include\lighting\LightedCylinderRenderable.hpp" />
+    <ClInclude Include="include\lighting\LightedMeshRenderable.hpp" />
+    <ClInclude Include="include\lighting\Material.hpp" />
+    <ClInclude Include="include\lighting\PointLightRenderable.hpp" />
+    <ClInclude Include="include\lighting\SpotLightRenderable.hpp" />
     <ClInclude Include="include\Plane.hpp" />
     <ClInclude Include="include\QuadRenderable.hpp" />
     <ClInclude Include="World.hpp" />
@@ -219,6 +227,14 @@
     <ClCompile Include="src\dynamics\SpringListRenderable.cpp" />
     <ClCompile Include="src\HierarchicalMeshRenderable.cpp" />
     <ClCompile Include="src\Hitbox.cpp" />
+    <ClCompile Include="src\lighting\DirectionalLightRenderable.cpp" />
+    <ClCompile Include="src\lighting\Light.cpp" />
+    <ClCompile Include="src\lighting\LightedCubeRenderable.cpp" />
+    <ClCompile Include="src\lighting\LightedCylinderRenderable.cpp" />
+    <ClCompile Include="src\lighting\LightedMeshRenderable.cpp" />
+    <ClCompile Include="src\lighting\Material.cpp" />
+    <ClCompile Include="src\lighting\PointLightRenderable.cpp" />
+    <ClCompile Include="src\lighting\SpotLightRenderable.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\QuadRendable.cpp" />
     <ClCompile Include="World.cpp" />
@@ -230,9 +246,6 @@
     <ClCompile Include="src\gl_helper.cpp" />
     <ClCompile Include="src\HierarchicalRenderable.cpp" />
     <ClCompile Include="src\Io.cpp" />
-    <ClCompile Include="src\KeyframeCollection.cpp" />
-    <ClCompile Include="src\KeyframedMeshRenderable.cpp" />
-    <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\log.cpp" />
     <ClCompile Include="src\Renderable.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
@@ -250,6 +263,8 @@
     <None Include="shaders\lightFragment.glsl" />
     <None Include="shaders\lightVertex.glsl" />
     <None Include="shaders\defaultVertex.glsl" />
+    <None Include="shaders\phongFragment.glsl" />
+    <None Include="shaders\phongVertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

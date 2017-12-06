@@ -88,10 +88,8 @@ glm::vec3 Hitbox::collide(const HitboxPtr hb) const {
 
 	glm::vec3 realCenter = m_model * glm::vec4(m_center, 1.0);
 	glm::vec3 realCenter2 = hb->m_model * glm::vec4(hb->m_center, 1.0);
-	glm::vec3 diffCenter = realCenter2 - realCenter;
-
 	
-
+	return glm::normalize(realCenter2 - realCenter);
 }
 
 bool Hitbox::collideAlongAxis(const std::vector<glm::vec3>& a, const std::vector<glm::vec3>& b, glm::vec3& axis) const {

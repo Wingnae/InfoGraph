@@ -25,6 +25,12 @@
     <Filter Include="Source Files\infograph\dynamics">
       <UniqueIdentifier>{ddb8b211-2398-4619-b8dc-b1f101f5d263}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\infograph\lighting">
+      <UniqueIdentifier>{2060e5a7-15a0-43f8-ae8c-4ea888fc08d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infograph\lighting">
+      <UniqueIdentifier>{1120a8a3-473f-4daf-a216-148c7589d4f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -150,6 +156,30 @@
     <ClInclude Include="include\Hitbox.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
+    <ClInclude Include="include\lighting\DirectionalLightRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\Light.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\LightedCubeRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\LightedCylinderRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\LightedMeshRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\Material.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\PointLightRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lighting\SpotLightRenderable.hpp">
+      <Filter>Header Files\infograph\lighting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -179,9 +209,6 @@
     <ClCompile Include="src\Io.cpp">
       <Filter>Source Files\infograph</Filter>
     </ClCompile>
-    <ClCompile Include="src\Light.cpp">
-      <Filter>Source Files\infograph</Filter>
-    </ClCompile>
     <ClCompile Include="src\log.cpp">
       <Filter>Source Files\infograph</Filter>
     </ClCompile>
@@ -195,12 +222,6 @@
       <Filter>Source Files\infograph</Filter>
     </ClCompile>
     <ClCompile Include="src\Viewer.cpp">
-      <Filter>Source Files\infograph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\KeyframeCollection.cpp">
-      <Filter>Source Files\infograph</Filter>
-    </ClCompile>
-    <ClCompile Include="src\KeyframedMeshRenderable.cpp">
       <Filter>Source Files\infograph</Filter>
     </ClCompile>
     <ClCompile Include="Car.cpp">
@@ -275,6 +296,30 @@
     <ClCompile Include="src\Plane.cpp">
       <Filter>Source Files\infograph</Filter>
     </ClCompile>
+    <ClCompile Include="src\lighting\DirectionalLightRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\Light.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\LightedCubeRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\LightedCylinderRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\LightedMeshRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\Material.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\PointLightRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lighting\SpotLightRenderable.cpp">
+      <Filter>Source Files\infograph\lighting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\lightVertex.glsl">
@@ -287,6 +332,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\defaultVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\phongFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\phongVertex.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

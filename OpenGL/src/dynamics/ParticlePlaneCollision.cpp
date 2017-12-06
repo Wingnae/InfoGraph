@@ -62,5 +62,5 @@ bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
 
 	float dist = glm::dot(particle->getPosition() - glm::vec3(0, 0, plane->distanceToOrigin()), plane->normal());
 	
-	return (dist < particle->getRadius()) ? true : false;
+	return dist < particle->getRadius();
 }
