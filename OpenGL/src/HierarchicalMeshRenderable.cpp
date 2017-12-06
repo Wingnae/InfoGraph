@@ -42,6 +42,16 @@ HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderPr
 	glcheck(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(unsigned int), m_indices.data(), GL_STATIC_DRAW));
 }
 
+HierarchicalMeshRenderable::HierarchicalMeshRenderable(ShaderProgramPtr shaderProgram, const std::vector<glm::vec3>& positions, const std::vector<unsigned int>& indices,
+	const std::vector<glm::vec3>& normals, const std::vector<glm::vec2>& texCoords) :
+	HierarchicalRenderable(shaderProgram),
+	m_positions(positions), m_indices(indices), m_normals(normals),
+	m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_iBuffer(0) {
+
+}
+
+
+
 void HierarchicalMeshRenderable::do_draw()
 {
 	int positionLocation = m_shaderProgram->getAttributeLocation("vPosition");
@@ -102,13 +112,4 @@ HierarchicalMeshRenderable::~HierarchicalMeshRenderable()
 	glcheck(glDeleteBuffers(1, &m_cBuffer));
 	glcheck(glDeleteBuffers(1, &m_nBuffer));
 	glcheck(glDeleteBuffers(1, &m_iBuffer));
-}
-
-void HierarchicalMeshRenderable::setColor(glm::vec4 & col) {
-	if (m_colors[0] != col) {
-		for (int i = 0; i < m_colors.size(); i++)
-			m_colors[i] = col;
-		glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_cBuffer));
-		glcheck(glBufferData(GL_ARRAY_BUFFER, m_colors.size() * sizeof(glm::vec4), m_colors.data(), GL_STATIC_DRAW));
-	}
 }

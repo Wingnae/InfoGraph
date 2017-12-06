@@ -2,13 +2,15 @@
 
 #include <ShaderProgram.hpp>
 #include <Viewer.hpp>
-#include <HierarchicalMeshRenderable.hpp>
+#include <lighting/LightedMeshRenderable.hpp>
 #include "Car.hpp"
+
+#define WORLD_SIZE	150.0f
 
 class World : public HierarchicalRenderable {
 private:
-	HierarchicalMeshRenderablePtr ground;
-	std::vector<HierarchicalMeshRenderablePtr> boxes;
+	LightedMeshRenderablePtr ground;
+	std::vector<LightedMeshRenderablePtr> boxes;
 	CarPtr car;
 
 public:

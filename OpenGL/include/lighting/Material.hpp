@@ -134,6 +134,41 @@ public:
      */
     static MaterialPtr Bronze();
 
+	/**
+	* @brief Construct a chrome material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A chrome material.
+	*/
+	static MaterialPtr Chrome();
+
+	/**
+	* @brief Construct a black rubber material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A black rubber material.
+	*/
+	static MaterialPtr BlackRubber();
+
+	/**
+	* @brief Construct a white rubber material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A white rubber material.
+	*/
+	static MaterialPtr WhiteRubber();
+
+	/**
+	* @brief Construct a white plastic material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A white plastic material.
+	*/
+	static MaterialPtr WhitePlastic();
+	/**
+	* @brief Construct a red plastic material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A red plastic material.
+	*/
+	static MaterialPtr RedPlastic();
+
+	/**
+	* @brief Construct a ruby material from real data according to http://devernay.free.fr/cours/opengl/materials.html
+	* @return A ruby material.
+	*/
+	static MaterialPtr Ruby();
+
 private:
     glm::vec3 m_ambient; /*!< The ambient material vector defines what color this object reflects under ambient lighting. */
     glm::vec3 m_diffuse; /*!< The diffuse material vector defines the color of the object under diffuse lighting. */

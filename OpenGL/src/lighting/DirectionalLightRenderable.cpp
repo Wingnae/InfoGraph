@@ -102,7 +102,10 @@ void DirectionalLightRenderable::do_draw()
     }
 }
 
-void DirectionalLightRenderable::do_animate(float /*time*/) {}
+void DirectionalLightRenderable::do_animate(float /*time*/) {
+
+}
+
 glm::vec3 DirectionalLightRenderable::position() const
 {
     return m_position;

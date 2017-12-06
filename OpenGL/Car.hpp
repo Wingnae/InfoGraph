@@ -3,8 +3,9 @@
 #include <ShaderProgram.hpp>
 #include <Viewer.hpp>
 #include <HierarchicalMeshRenderable.hpp>
+#include <lighting/LightedMeshRenderable.hpp>
 
-#define GEAR1		30.0f
+#define GEAR1		25.0f
 #define GEARR		15.0f
 #define BRAKES		10000.0f
 #define STEERING	45.0f
@@ -14,7 +15,7 @@
 #define GRAVITY		9.81f
 #define	CDRAG		10.0f
 #define CRR			100.0f
-#define CORNER		0.002f
+#define CORNER		0.005f
 #define INERTIA		(FRONTCG * REARCG)
 
 #define FRONTCG		0.98f
@@ -80,8 +81,8 @@ private:
 	glm::vec3 m_Fg;
 	glm::vec3 m_Ftotal;
 
-	HierarchicalMeshRenderablePtr m_frame;
-	HierarchicalMeshRenderablePtr m_wheels[4];
+	LightedMeshRenderablePtr m_frame;
+	LightedMeshRenderablePtr m_wheels[4];
 	float m_lastTime;
 	State m_state;
 };

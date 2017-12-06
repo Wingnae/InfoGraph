@@ -1,11 +1,13 @@
 #pragma once
 
-#include <HierarchicalRenderable.hpp>
+#include <HierarchicalMeshRenderable.hpp>
+#include <lighting/Material.hpp>
 
 class Hitbox : public HierarchicalRenderable {
 public:
 	~Hitbox();
 	Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos);
+	void setMaterial(const MaterialPtr& material);
 	glm::vec3 collide(const HitboxPtr hb) const;
 	bool collideAlongAxis(const std::vector<glm::vec3>& hb1, const std::vector<glm::vec3>& hb2, glm::vec3& axis) const;
 
@@ -26,6 +28,8 @@ private:
 	unsigned int m_cBuffer;
 	unsigned int m_nBuffer;
 	unsigned int m_iBuffer;
+
+	MaterialPtr m_material;
 };
 
 typedef std::shared_ptr<Hitbox> HitboxPtr;

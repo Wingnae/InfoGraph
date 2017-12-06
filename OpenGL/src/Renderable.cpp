@@ -8,8 +8,7 @@ Renderable::~Renderable(){}
 Renderable::Renderable(ShaderProgramPtr program)
   : m_shaderProgram(program),
     m_model(glm::mat4(1.0)),
-    m_viewer(nullptr),
-	m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_iBuffer(0)
+    m_viewer(nullptr)
 {
 }
 

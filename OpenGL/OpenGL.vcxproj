@@ -178,8 +178,6 @@
     <ClInclude Include="include\Hitbox.hpp" />
     <ClInclude Include="include\lighting\DirectionalLightRenderable.hpp" />
     <ClInclude Include="include\lighting\Light.hpp" />
-    <ClInclude Include="include\lighting\LightedCubeRenderable.hpp" />
-    <ClInclude Include="include\lighting\LightedCylinderRenderable.hpp" />
     <ClInclude Include="include\lighting\LightedMeshRenderable.hpp" />
     <ClInclude Include="include\lighting\Material.hpp" />
     <ClInclude Include="include\lighting\PointLightRenderable.hpp" />
@@ -196,7 +194,6 @@
     <ClInclude Include="include\Io.hpp" />
     <ClInclude Include="include\KeyframeCollection.hpp" />
     <ClInclude Include="include\KeyframedMeshRenderable.hpp" />
-    <ClInclude Include="include\Light.hpp" />
     <ClInclude Include="include\log.hpp" />
     <ClInclude Include="include\Renderable.hpp" />
     <ClInclude Include="include\ShaderProgram.hpp" />
@@ -229,8 +226,6 @@
     <ClCompile Include="src\Hitbox.cpp" />
     <ClCompile Include="src\lighting\DirectionalLightRenderable.cpp" />
     <ClCompile Include="src\lighting\Light.cpp" />
-    <ClCompile Include="src\lighting\LightedCubeRenderable.cpp" />
-    <ClCompile Include="src\lighting\LightedCylinderRenderable.cpp" />
     <ClCompile Include="src\lighting\LightedMeshRenderable.cpp" />
     <ClCompile Include="src\lighting\Material.cpp" />
     <ClCompile Include="src\lighting\PointLightRenderable.cpp" />

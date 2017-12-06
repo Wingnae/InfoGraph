@@ -58,6 +58,11 @@ Hitbox::Hitbox(ShaderProgramPtr program, std::vector<glm::vec3>& pos) : Hierarch
 	glcheck(glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(glm::ivec4), m_indices.data(), GL_STATIC_DRAW));
 }
 
+void Hitbox::setMaterial(const MaterialPtr& material) {
+	m_material = material;
+}
+
+
 glm::vec3 Hitbox::collide(const HitboxPtr hb) const {
 	std::vector<glm::vec3> realP(m_positions.size()), realP2(hb->m_positions.size());
 

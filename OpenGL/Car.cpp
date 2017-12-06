@@ -8,13 +8,15 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRender
 	setParentTransform(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 0.5f)));
 
 	//Frame
-	m_frame = std::make_shared<HierarchicalMeshRenderable>(shader, "meshes/car.obj");
+	m_frame = std::make_shared<LightedMeshRenderable>(shader, "meshes/car.obj");
 	m_frame->init();
+	m_frame->setMaterial(Material::RedPlastic());
 
 	//Wheels
 	for (int i = 0; i < 4; i++) {
-		m_wheels[i] = std::make_shared<HierarchicalMeshRenderable>(shader, "meshes/wheel.obj");
+		m_wheels[i] = std::make_shared<LightedMeshRenderable>(shader, "meshes/wheel.obj");
 		m_wheels[i]->init();
+		m_wheels[i]->setMaterial(Material::BlackRubber());
 		HierarchicalRenderable::addChild(m_frame, m_wheels[i]);
 	}
 
@@ -52,7 +54,9 @@ Car::Car(ShaderProgramPtr shader, float mass, float engine) : HierarchicalRender
 void Car::init() {
 	HierarchicalRenderable::addChild(shared_from_this(), m_frame);
 	m_hitbox = m_frame->getHitbox();
+	m_hitbox->setMaterial(Material::Bronze());
 	m_hitbox->updateModelMatrix();
+
 	m_frame->getHitbox()->updateModelMatrix();
 	for (auto w : m_wheels)
 		w->getHitbox()->updateModelMatrix();

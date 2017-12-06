@@ -57,9 +57,6 @@
     <ClInclude Include="include\Io.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
-    <ClInclude Include="include\Light.hpp">
-      <Filter>Header Files\infograph</Filter>
-    </ClInclude>
     <ClInclude Include="include\log.hpp">
       <Filter>Header Files\infograph</Filter>
     </ClInclude>
@@ -160,12 +157,6 @@
       <Filter>Header Files\infograph\lighting</Filter>
     </ClInclude>
     <ClInclude Include="include\lighting\Light.hpp">
-      <Filter>Header Files\infograph\lighting</Filter>
-    </ClInclude>
-    <ClInclude Include="include\lighting\LightedCubeRenderable.hpp">
-      <Filter>Header Files\infograph\lighting</Filter>
-    </ClInclude>
-    <ClInclude Include="include\lighting\LightedCylinderRenderable.hpp">
       <Filter>Header Files\infograph\lighting</Filter>
     </ClInclude>
     <ClInclude Include="include\lighting\LightedMeshRenderable.hpp">
@@ -300,12 +291,6 @@
       <Filter>Source Files\infograph\lighting</Filter>
     </ClCompile>
     <ClCompile Include="src\lighting\Light.cpp">
-      <Filter>Source Files\infograph\lighting</Filter>
-    </ClCompile>
-    <ClCompile Include="src\lighting\LightedCubeRenderable.cpp">
-      <Filter>Source Files\infograph\lighting</Filter>
-    </ClCompile>
-    <ClCompile Include="src\lighting\LightedCylinderRenderable.cpp">
       <Filter>Source Files\infograph\lighting</Filter>
     </ClCompile>
     <ClCompile Include="src\lighting\LightedMeshRenderable.cpp">
