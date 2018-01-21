@@ -184,6 +184,13 @@
     <ClInclude Include="include\lighting\SpotLightRenderable.hpp" />
     <ClInclude Include="include\Plane.hpp" />
     <ClInclude Include="include\QuadRenderable.hpp" />
+    <ClInclude Include="include\texturing\BillBoardPlaneRenderable.hpp" />
+    <ClInclude Include="include\texturing\MipMapCubeRenderable.hpp" />
+    <ClInclude Include="include\texturing\MultiTexturedCubeRenderable.hpp" />
+    <ClInclude Include="include\texturing\TexturedCubeRenderable.hpp" />
+    <ClInclude Include="include\texturing\TexturedLightedMeshRenderable.hpp" />
+    <ClInclude Include="include\texturing\TexturedPlaneRenderable.hpp" />
+    <ClInclude Include="include\texturing\TexturedTriangleRenderable.hpp" />
     <ClInclude Include="World.hpp" />
     <ClInclude Include="include\Camera.hpp" />
     <ClInclude Include="include\FPSCounter.hpp" />
@@ -232,6 +239,13 @@
     <ClCompile Include="src\lighting\SpotLightRenderable.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\QuadRendable.cpp" />
+    <ClCompile Include="src\texturing\BillBoardPlaneRenderable.cpp" />
+    <ClCompile Include="src\texturing\MipMapCubeRenderable.cpp" />
+    <ClCompile Include="src\texturing\MultiTexturedCubeRenderable.cpp" />
+    <ClCompile Include="src\texturing\TexturedCubeRenderable.cpp" />
+    <ClCompile Include="src\texturing\TexturedLightedMeshRenderable.cpp" />
+    <ClCompile Include="src\texturing\TexturedPlaneRenderable.cpp" />
+    <ClCompile Include="src\texturing\TexturedTriangleRenderable.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Camera.cpp" />
@@ -254,12 +268,24 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\billboardFragment.glsl" />
+    <None Include="shaders\billboardVertex.glsl" />
     <None Include="shaders\defaultFragment.glsl" />
+    <None Include="shaders\flatFragment.glsl" />
+    <None Include="shaders\flatVertex.glsl" />
     <None Include="shaders\lightFragment.glsl" />
     <None Include="shaders\lightVertex.glsl" />
     <None Include="shaders\defaultVertex.glsl" />
+    <None Include="shaders\multiTextureFragment.glsl" />
+    <None Include="shaders\multiTextureVertex.glsl" />
     <None Include="shaders\phongFragment.glsl" />
     <None Include="shaders\phongVertex.glsl" />
+    <None Include="shaders\simpleTextureFragment.glsl" />
+    <None Include="shaders\simpleTextureVertex.glsl" />
+    <None Include="shaders\textureFragment.glsl" />
+    <None Include="shaders\textureVertex.glsl" />
+    <None Include="shaders\text_fragment.glsl" />
+    <None Include="shaders\text_vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

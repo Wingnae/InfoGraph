@@ -31,6 +31,12 @@
     <Filter Include="Source Files\infograph\lighting">
       <UniqueIdentifier>{1120a8a3-473f-4daf-a216-148c7589d4f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\infograph\texturing">
+      <UniqueIdentifier>{f9e697b4-73f0-4a4c-9b16-20b10a0e55f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infograph\texturing">
+      <UniqueIdentifier>{9e66b262-a3fc-4402-9cca-35865940342b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -171,6 +177,27 @@
     <ClInclude Include="include\lighting\SpotLightRenderable.hpp">
       <Filter>Header Files\infograph\lighting</Filter>
     </ClInclude>
+    <ClInclude Include="include\texturing\BillBoardPlaneRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\MipMapCubeRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\MultiTexturedCubeRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\TexturedCubeRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\TexturedLightedMeshRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\TexturedPlaneRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texturing\TexturedTriangleRenderable.hpp">
+      <Filter>Header Files\infograph\texturing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -305,6 +332,27 @@
     <ClCompile Include="src\lighting\SpotLightRenderable.cpp">
       <Filter>Source Files\infograph\lighting</Filter>
     </ClCompile>
+    <ClCompile Include="src\texturing\BillBoardPlaneRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\MipMapCubeRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\MultiTexturedCubeRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\TexturedCubeRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\TexturedLightedMeshRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\TexturedPlaneRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texturing\TexturedTriangleRenderable.cpp">
+      <Filter>Source Files\infograph\texturing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\lightVertex.glsl">
@@ -323,6 +371,42 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\phongVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\billboardFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\billboardVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\flatFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\flatVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\multiTextureFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\multiTextureVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\simpleTextureFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\simpleTextureVertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\text_fragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\text_vertex.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\textureFragment.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\textureVertex.glsl">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
